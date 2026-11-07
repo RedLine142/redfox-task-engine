@@ -101,62 +101,28 @@
       }
       body.rf-blood-night .item:hover::before { width:5px; background:var(--rf-blood-bright); }
       body.rf-blood-night .item a {
-        display:grid !important; grid-template-columns:82px minmax(45px,auto) minmax(100px,1fr);
+        display:grid !important;
+        grid-template-columns:minmax(110px,clamp(110px,24%,250px)) minmax(45px,auto) minmax(0,1fr);
         align-items:center; gap:17px; min-height:92px; padding:12px 17px 12px 20px !important;
         color:var(--rf-blood-text) !important; text-decoration:none !important;
       }
+      /* Every row gets a responsive image column. Image height follows its own proportions. */
       body.rf-blood-night .item strong {
-        display:block; width:82px; height:66px; overflow:hidden;
+        display:block; box-sizing:border-box; width:100%; height:auto; min-width:0;
+        margin:0; padding:0; overflow:hidden;
         border:1px solid rgba(230,67,87,.35); background:#080608;
       }
-      body.rf-blood-night .item strong span,body.rf-blood-night .item strong img {
-        display:block; width:100% !important; height:100% !important;
+      body.rf-blood-night .item strong span {
+        display:block; width:100%; height:auto; line-height:0;
       }
       body.rf-blood-night .item strong img {
-        object-fit:cover; filter:saturate(.72) contrast(1.12) brightness(.82);
+        display:block; width:100% !important; max-width:100% !important;
+        height:auto !important; object-fit:contain;
+        filter:saturate(.72) contrast(1.12) brightness(.82);
         transition:filter .25s ease,transform .35s ease;
       }
       body.rf-blood-night .item:hover strong img {
-        filter:saturate(1) contrast(1.15) brightness(1); transform:scale(1.06);
-      }
-
-      /* Special wide artwork: preserve the 852:242 banner proportions */
-      body.rf-blood-night .item strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) {
-        grid-column:1 / -1 !important;
-        display:block !important;
-        box-sizing:border-box !important;
-        width:min(100%,852px) !important;
-        height:auto !important;
-        aspect-ratio:852 / 242 !important;
-        margin:4px auto 12px !important;
-        overflow:hidden !important;
-      }
-      body.rf-blood-night .item strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) > span {
-        display:block !important;
-        width:100% !important;
-        height:100% !important;
-      }
-      body.rf-blood-night .item strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) img {
-        display:block !important;
-        width:100% !important;
-        max-width:none !important;
-        height:100% !important;
-        aspect-ratio:852 / 242 !important;
-        object-fit:contain !important;
-      }
-
-      /* Wide 852:242 artwork inside the game content */
-      body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) {
-        display:block; box-sizing:border-box; grid-column:1 / -1;
-        width:min(100%,852px); height:auto; aspect-ratio:852 / 242;
-        margin:14px auto !important; padding:0; overflow:hidden;
-      }
-      body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) > span {
-        display:block; width:100%; height:100%;
-      }
-      body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) img {
-        display:block; width:100% !important; height:100% !important;
-        max-width:none !important; aspect-ratio:852 / 242; object-fit:cover;
+        filter:saturate(1) contrast(1.15) brightness(1); transform:scale(1.025);
       }
       body.rf-blood-night .item a > div:not(.progress) {
         color:#f4dfe3 !important; font-size:16px; font-weight:900;
@@ -220,10 +186,9 @@
         body.rf-blood-night .wrapper { width:calc(100% - 18px); }
         body.rf-blood-night .container { margin-top:10px !important; padding:17px 12px !important; }
         body.rf-blood-night .item a {
-          grid-template-columns:66px 43px minmax(55px,1fr); gap:10px; min-height:76px;
-          padding:9px 10px 9px 13px !important;
+          grid-template-columns:minmax(84px,30%) minmax(35px,auto) minmax(0,1fr);
+          gap:10px; min-height:76px; padding:9px 10px 9px 13px !important;
         }
-        body.rf-blood-night .item strong { width:66px; height:54px; }
         body.rf-blood-night .item a > div:not(.progress) { font-size:14px; }
         body.rf-blood-night .time { width:calc(100% - 18px); padding:13px 12px !important; }
         body.rf-blood-night .time .wrapper { align-items:flex-start; flex-direction:column; gap:8px; }
