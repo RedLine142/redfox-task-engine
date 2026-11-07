@@ -217,9 +217,23 @@
     return /^\/play\/safari\//i.test(path);
   }
 
+  function disableTheme() {
+    // Safety cleanup in case an older cached copy ran on this page.
+    document.documentElement.classList.remove(ROOT_CLASS);
+    if (document.body) document.body.classList.remove(ROOT_CLASS);
+    var style = document.getElementById(STYLE_ID);
+    if (style) style.remove();
+    var particles = document.querySelector('.rf-blood-particles');
+    if (particles) particles.remove();
+  }
+
   function init() {
-    if (!document.body || document.body.classList.contains(ROOT_CLASS)) return;
-    if (!isGameCabinetPage()) return;
+    if (!document.body) return;
+    if (!isGameCabinetPage()) {
+      disableTheme();
+      return;
+    }
+    if (document.body.classList.contains(ROOT_CLASS)) return;
     addStyles();
     document.documentElement.classList.add(ROOT_CLASS);
     document.body.classList.add(ROOT_CLASS);
