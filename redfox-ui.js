@@ -37,7 +37,7 @@
       link.rel = 'stylesheet';
       (document.head || document.documentElement).appendChild(link);
     }
-    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.5.1-halloween-20261108';
+    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@156adf34859ce2db9a2a981c4805175871614834/redfox-ui.css';
   }
 
   function applyTheme(options) {
