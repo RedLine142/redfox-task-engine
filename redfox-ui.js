@@ -123,7 +123,7 @@
         var combined = (codeSource.textContent || '').trim();
         if (!combined) return;
 
-        var splitAt = combined.search(/\\s/);
+        var splitAt = combined.search(/\s/);
         var codeText = splitAt < 0 ? combined : combined.slice(0, splitAt);
         var commentText = splitAt < 0 ? '' : combined.slice(splitAt).trim();
 
