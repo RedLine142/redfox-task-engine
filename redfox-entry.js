@@ -1,8 +1,8 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.5.1-halloween-20261108';
-  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@e28b6bd6d6aa613589bdebc9511f2958e3e5d3fd/';
+  var VERSION = '1.5.2-halloween-mobilefix-20261108';
+  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@e559cbe6a842a8e7fab067e9216967999bbe4016/';
   var modules = [
     { id: 'rf-module-ui-v151', file: 'redfox-ui.js' },
     { id: 'rf-module-functions-v151', file: 'redfox-functions.js' }
