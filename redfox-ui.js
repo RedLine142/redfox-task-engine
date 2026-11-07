@@ -12,7 +12,7 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.6.1-inline-game-timer') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.6.2-no-extra-timer') return;
 
   var THEME = {
     background: '#080608',
@@ -98,125 +98,12 @@
     content.style.setProperty('margin-top', requiredHeight + 'px', 'important');
   }
 
-  var TIMER_STORAGE_KEY = 'RF_GAME_TIMER_STATE_V1';
-  var timerPanel = null;
-  var timerInterval = null;
-
-  function parseClock(value) {
-    var match = String(value || '').trim().match(/^(?:(\d+)\s*д\.\s*)?(\d{1,3}):(\d{2}):(\d{2})$/i);
-    if (!match) return null;
-    return (Number(match[1] || 0) * 86400) +
-      (Number(match[2]) * 3600) + (Number(match[3]) * 60) + Number(match[4]);
-  }
-
-  function formatClock(total, withDays) {
-    total = Math.max(0, Math.floor(total));
-    var days = Math.floor(total / 86400);
-    var hours = Math.floor((total % 86400) / 3600);
-    var minutes = Math.floor((total % 3600) / 60);
-    var seconds = total % 60;
-    var clock = String(hours).padStart(2, '0') + ':' +
-      String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
-    return withDays && days ? days + ' д. ' + clock : clock;
-  }
-
-  function readOriginalTimer() {
-    var leftNode = document.getElementById('time_left');
-    var timerNode = document.getElementById('timer');
-    if (!leftNode || !timerNode) return null;
-
-    var left = parseClock(leftNode.textContent);
-    var elapsed = parseClock(timerNode.textContent);
-    if (left === null || elapsed === null) return null;
-
-    var state = {
-      deadline: Date.now() + left * 1000,
-      elapsed: elapsed,
-      savedAt: Date.now()
-    };
-
-    try { window.localStorage.setItem(TIMER_STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
-    return state;
-  }
-
-  function readSavedTimer() {
-    try {
-      var raw = window.localStorage.getItem(TIMER_STORAGE_KEY);
-      if (!raw) return null;
-      var state = JSON.parse(raw);
-      if (!state || !isFinite(state.deadline) || !isFinite(state.elapsed) || !isFinite(state.savedAt)) return null;
-      return state;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function ensureTimerPanel() {
-    if (!document.body) return null;
-    var container = document.querySelector('.container-location');
-    if (!container) return null;
-
-    // Keep the engine's original timer on the main game page; add a copy only where it is absent.
-    if (document.querySelector('.time #time_left, .time #timer')) return null;
-
-    timerPanel = document.getElementById('rf-game-timer-panel');
-    if (!timerPanel) {
-      timerPanel = document.createElement('div');
-      timerPanel.id = 'rf-game-timer-panel';
-      timerPanel.className = 'time rf-game-timer-inflow';
-      timerPanel.setAttribute('aria-live', 'off');
-      timerPanel.innerHTML =
-        '<div class="wrapper">' +
-          '<div class="level_time">До конца: <span data-rf-time-left>—</span></div>' +
-          '<div class="timer"><span data-rf-timer>—</span></div>' +
-        '</div>';
-    }
-
-    if (timerPanel.previousElementSibling !== container) {
-      container.insertAdjacentElement('afterend', timerPanel);
-    }
-    return timerPanel;
-  }
-
-  function updateTimerPanel() {
-    if (!isPlayerPage || !document.body) return;
-
-    var liveState = readOriginalTimer();
-    var state = liveState || readSavedTimer();
-    var panel = ensureTimerPanel();
-    if (!panel) return;
-
-    var leftOutput = panel.querySelector('[data-rf-time-left]');
-    var elapsedOutput = panel.querySelector('[data-rf-timer]');
-
-    if (!state) {
-      leftOutput.textContent = 'ОЖИДАНИЕ ДАННЫХ';
-      elapsedOutput.textContent = '—';
-      panel.classList.add('rf-game-timer-waiting');
-      return;
-    }
-
-    panel.classList.remove('rf-game-timer-waiting');
-    var now = Date.now();
-    var remaining = Math.max(0, Math.ceil((state.deadline - now) / 1000));
-    var elapsed = Math.max(0, Math.floor(state.elapsed + (now - state.savedAt) / 1000));
-
-    leftOutput.textContent = formatClock(remaining, true);
-    elapsedOutput.textContent = formatClock(elapsed, false);
-  }
-
-  function startGameTimer() {
-    if (timerInterval) window.clearInterval(timerInterval);
-    updateTimerPanel();
-    timerInterval = window.setInterval(updateTimerPanel, 1000);
-  }
 
   function refresh() {
     installStylesheet();
     document.documentElement.classList.add('rfui-ready');
     if (document.body) document.body.classList.add('rfui-ready');
     syncMobileCodeHeader();
-    startGameTimer();
     return true;
   }
 
@@ -229,7 +116,7 @@
   }
 
   window.RedFoxUI = {
-    version: '1.6.1-inline-game-timer',
+    version: '1.6.2-no-extra-timer',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
