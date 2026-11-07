@@ -1,8 +1,8 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.5.5-back-button-label-20261108';
-  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@fe9117e537b95566e2eec7c94e3cdd941fdf5db4/';
+  var VERSION = '1.5.6-home-button-label-20261108';
+  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@f6691f095fb3f8fb5bd172324e3dda5d61589560/';
   var modules = [
     { id: 'rf-module-ui-v151', file: 'redfox-ui.js' },
     { id: 'rf-module-functions-v151', file: 'redfox-functions.js' }
