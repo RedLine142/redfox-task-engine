@@ -1,23 +1,25 @@
-
     :root {
-      --rf6-bg: #090711;
-      --rf6-panel: #171020;
-      --rf6-panel2: #24142d;
-      --rf6-text: #fff4fb;
-      --rf6-muted: #c6afc5;
-      --rf6-pink: #ff2d87;
-      --rf6-pink2: #ff62b0;
-      --rf6-cyan: #27e8e0;
-      --rf6-border: #63305f;
-      --rf6-input: #100c18;
+      --rf6-bg: #080608;
+      --rf6-panel: rgba(24, 13, 17, .96);
+      --rf6-panel2: rgba(55, 12, 25, .92);
+      --rf6-text: #f6e9eb;
+      --rf6-muted: #b99da3;
+      --rf6-pink: #b5122b;
+      --rf6-pink2: #f02b43;
+      --rf6-cyan: #e54a60;
+      --rf6-border: rgba(211, 34, 58, .38);
+      --rf6-input: #10090d;
       --rf6-bg-image: none;
     }
 
     body.rfui-ready {
-      background: #090711 !important;
-      background-color: #090711 !important;
+      position: relative !important;
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      background: #080608 !important;
+      background-color: #080608 !important;
       color: var(--rf6-text) !important;
-      font-family: Arial, Helvetica, sans-serif !important;
+      font-family: "Arial Narrow", "Roboto Condensed", Arial, sans-serif !important;
     }
 
     body.rfui-ready::before {
@@ -27,13 +29,26 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(ellipse at 15% 10%, rgba(255,45,135,.20), transparent 38%),
-        radial-gradient(ellipse at 85% 28%, rgba(39,232,224,.13), transparent 36%),
-        linear-gradient(145deg, #090711 0%, #160d20 52%, #080b15 100%);
+        radial-gradient(ellipse at 50% -15%, rgba(125,9,29,.36), transparent 48%),
+        radial-gradient(ellipse at 5% 45%, rgba(80,8,21,.18), transparent 35%),
+        linear-gradient(180deg,#10090d 0%,#080608 65%,#050405 100%);
+    }
+
+    body.rfui-ready::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .12;
+      background:
+        repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.035) 4px),
+        linear-gradient(90deg,rgba(0,0,0,.52),transparent 15%,transparent 85%,rgba(0,0,0,.52));
+      background-size: auto, auto;
     }
 
     body.rfui-ready.rfui-has-background-image {
-      background-image: linear-gradient(rgba(8,6,16,.72), rgba(8,6,16,.88)), var(--rf6-bg-image) !important;
+      background-image: linear-gradient(rgba(8,6,8,.78), rgba(8,6,8,.91)), var(--rf6-bg-image) !important;
       background-position: center top !important;
       background-size: cover !important;
       background-attachment: fixed !important;
@@ -44,12 +59,12 @@
       box-sizing: border-box !important;
       padding: 12px !important;
       color: var(--rf6-text) !important;
-      background: linear-gradient(135deg, rgba(35,17,43,.97), rgba(15,13,28,.97)) !important;
-      border: 1px solid rgba(255,45,135,.65) !important;
-      border-bottom: 3px solid var(--rf6-pink) !important;
-      border-radius: 13px !important;
-      box-shadow: 0 0 18px rgba(255,45,135,.17), 0 10px 35px rgba(0,0,0,.45) !important;
-      backdrop-filter: blur(14px);
+      background: linear-gradient(135deg, rgba(83,9,25,.38), rgba(17,12,16,.98)) !important;
+      border: 1px solid rgba(211,34,58,.48) !important;
+      border-bottom: 3px solid var(--rf6-pink2) !important;
+      border-radius: 4px !important;
+      box-shadow: 0 0 18px rgba(181,18,43,.13), 0 10px 35px rgba(0,0,0,.55) !important;
+      backdrop-filter: blur(10px);
     }
 
     .rfui-ready .enter input,
@@ -57,21 +72,21 @@
       box-sizing: border-box !important;
       min-height: 46px !important;
       padding: 11px 14px !important;
-      color: #fff !important;
-      background: #100c18 !important;
-      border: 1px solid #75406e !important;
-      border-radius: 8px !important;
+      color: #fff1f2 !important;
+      background: #10090d !important;
+      border: 1px solid rgba(190,30,54,.48) !important;
+      border-radius: 3px !important;
       outline: none !important;
       font: inherit !important;
-      box-shadow: inset 0 0 12px rgba(0,0,0,.35) !important;
+      box-shadow: inset 0 1px 7px rgba(0,0,0,.65) !important;
     }
 
     .rfui-ready .enter input:focus {
-      border-color: var(--rf6-cyan) !important;
-      box-shadow: 0 0 0 2px rgba(39,232,224,.17), 0 0 16px rgba(39,232,224,.16) !important;
+      border-color: var(--rf6-pink2) !important;
+      box-shadow: 0 0 0 2px rgba(240,43,67,.15), 0 0 16px rgba(240,43,67,.18) !important;
     }
 
-    .rfui-ready .enter input::placeholder { color: #a88ca9 !important; }
+    .rfui-ready .enter input::placeholder { color: #9f777f !important; }
 
     .rfui-ready .enter button,
     .rfui-ready .enter input[type="submit"],
@@ -79,62 +94,62 @@
       min-height: 46px !important;
       padding: 10px 22px !important;
       color: #fff !important;
-      background: linear-gradient(110deg, #ff2384, #c61b9b) !important;
-      border: 1px solid #ff70b5 !important;
-      border-radius: 8px !important;
+      background: linear-gradient(110deg, #780b22, #c71935 72%, #e52b45) !important;
+      border: 1px solid #e54a60 !important;
+      border-radius: 3px !important;
       font: inherit !important;
-      font-weight: 800 !important;
-      letter-spacing: .07em !important;
+      font-weight: 900 !important;
+      letter-spacing: .09em !important;
       text-transform: uppercase !important;
       cursor: pointer !important;
-      box-shadow: 0 0 16px rgba(255,35,132,.32) !important;
+      box-shadow: 0 0 16px rgba(181,18,43,.28) !important;
       transition: .2s ease !important;
     }
 
     .rfui-ready .enter button:hover,
     .rfui-ready .enter input[type="submit"]:hover {
-      background: linear-gradient(110deg, #ff58a4, #e52bb7) !important;
-      box-shadow: 0 0 23px rgba(255,45,135,.55) !important;
+      background: linear-gradient(110deg, #a20e2c, #f02b43) !important;
+      box-shadow: 0 0 23px rgba(240,43,67,.42) !important;
       transform: translateY(-1px);
     }
 
     .rfui-ready .tab {
       box-sizing: border-box !important;
-      color: #c6afc5 !important;
-      background: linear-gradient(180deg, #21142b, #130e1d) !important;
-      border: 1px solid #59305b !important;
+      color: #b99da3 !important;
+      background: linear-gradient(180deg, #261117, #10090d) !important;
+      border: 1px solid rgba(190,30,54,.32) !important;
       border-bottom: 2px solid transparent !important;
-      border-radius: 9px 9px 0 0 !important;
+      border-radius: 3px 3px 0 0 !important;
       text-transform: uppercase !important;
-      letter-spacing: .045em !important;
-      font-weight: 700 !important;
+      letter-spacing: .07em !important;
+      font-weight: 800 !important;
       transition: .2s ease !important;
     }
 
     .rfui-ready .tab:hover {
       color: #fff !important;
-      border-color: var(--rf6-cyan) !important;
-      text-shadow: 0 0 9px rgba(39,232,224,.5) !important;
+      border-color: var(--rf6-pink2) !important;
+      text-shadow: 0 0 9px rgba(240,43,67,.45) !important;
     }
 
     .rfui-ready .tab.active {
       color: #fff !important;
-      background: linear-gradient(110deg, rgba(255,45,135,.24), rgba(39,232,224,.10)) !important;
+      background: linear-gradient(110deg, rgba(181,18,43,.27), rgba(80,8,21,.18)) !important;
       border: 1px solid var(--rf6-pink) !important;
-      border-bottom: 2px solid var(--rf6-cyan) !important;
-      box-shadow: 0 -4px 18px rgba(255,45,135,.14) !important;
-      text-shadow: 0 0 10px rgba(255,255,255,.28) !important;
+      border-bottom: 2px solid var(--rf6-pink2) !important;
+      box-shadow: 0 -4px 18px rgba(181,18,43,.14) !important;
+      text-shadow: 0 0 10px rgba(255,255,255,.22) !important;
     }
 
     .rfui-ready .tabcontent {
       box-sizing: border-box !important;
       color: var(--rf6-text) !important;
-      background: linear-gradient(145deg, rgba(28,17,38,.97), rgba(12,13,25,.97)) !important;
-      border: 1px solid #59305b !important;
-      border-top: 1px solid rgba(39,232,224,.45) !important;
-      border-radius: 0 0 13px 13px !important;
+      background: linear-gradient(145deg, rgba(36,14,20,.97), rgba(12,8,10,.98)) !important;
+      border: 1px solid rgba(190,30,54,.32) !important;
+      border-top: 1px solid rgba(229,74,96,.48) !important;
+      border-radius: 0 0 4px 4px !important;
       padding: 18px !important;
-      box-shadow: 0 12px 36px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.025) !important;
+      box-shadow: 0 12px 36px rgba(0,0,0,.48), inset 0 1px rgba(255,255,255,.025) !important;
     }
 
     .rfui-ready .task_text,
@@ -149,79 +164,79 @@
     .rfui-ready .task_text h2,
     .rfui-ready .task_text h3,
     .rfui-ready .task_text h4 {
-      color: #fff !important;
-      text-shadow: 0 0 14px rgba(255,45,135,.28) !important;
-      letter-spacing: .025em !important;
+      color: #fff1f2 !important;
+      text-shadow: 0 0 14px rgba(205,15,45,.32) !important;
+      letter-spacing: .035em !important;
+      text-transform: uppercase;
     }
 
     .rfui-ready .task_text a {
-      color: var(--rf6-cyan) !important;
-      text-decoration-color: rgba(39,232,224,.55) !important;
+      color: #e54a60 !important;
+      text-decoration-color: rgba(229,74,96,.55) !important;
     }
 
     .rfui-ready .task_text a:hover {
       color: #fff !important;
-      text-shadow: 0 0 10px rgba(39,232,224,.65) !important;
+      text-shadow: 0 0 10px rgba(240,43,67,.58) !important;
     }
 
     .rfui-ready .task_text img {
       max-width: 100% !important;
       height: auto !important;
-      border: 1px solid rgba(255,45,135,.35) !important;
-      border-radius: 9px !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,.3) !important;
+      border: 1px solid rgba(230,67,87,.35) !important;
+      border-radius: 3px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,.45) !important;
     }
 
     .rfui-ready .task_text blockquote {
       margin: 14px 0 !important;
       padding: 12px 15px !important;
-      color: #e9d8e9 !important;
-      background: rgba(255,45,135,.07) !important;
-      border-left: 3px solid var(--rf6-pink) !important;
-      border-radius: 0 8px 8px 0 !important;
+      color: #e9d8dc !important;
+      background: rgba(181,18,43,.09) !important;
+      border-left: 3px solid var(--rf6-pink2) !important;
+      border-radius: 0 3px 3px 0 !important;
     }
 
     .rfui-ready .task_text hr {
       border: 0 !important;
-      border-top: 1px solid rgba(39,232,224,.35) !important;
-      box-shadow: 0 1px 8px rgba(39,232,224,.12) !important;
+      border-top: 1px solid rgba(229,74,96,.38) !important;
+      box-shadow: 0 1px 8px rgba(229,74,96,.12) !important;
     }
 
     .rfui-ready .task_text table { max-width: 100% !important; border-collapse: collapse !important; }
     .rfui-ready .task_text td,
     .rfui-ready .task_text th {
-      border: 1px solid #59305b !important;
+      border: 1px solid rgba(190,30,54,.38) !important;
       color: var(--rf6-text) !important;
-      background-color: rgba(18,12,29,.72) !important;
+      background-color: rgba(18,10,14,.82) !important;
       padding: 7px !important;
     }
 
     .rfui-ready .task_text .myElem {
       color: var(--rf6-text) !important;
-      background: linear-gradient(145deg, #21142b, #120e1e) !important;
-      border: 1px solid #63305f !important;
-      border-radius: 9px !important;
+      background: linear-gradient(145deg, #2b1119, #12090d) !important;
+      border: 1px solid rgba(190,30,54,.42) !important;
+      border-radius: 3px !important;
     }
 
     .rfui-ready .task_text .answerEl,
-    .rfui-ready .task_text .rfte-answer { color: var(--rf6-cyan) !important; }
+    .rfui-ready .task_text .rfte-answer { color: #f04458 !important; }
 
     .rfui-ready .task_text .olymp td {
-      border: 1px solid #63305f !important;
-      background: rgba(255,255,255,.035) !important;
+      border: 1px solid rgba(190,30,54,.42) !important;
+      background: rgba(255,255,255,.025) !important;
       color: var(--rf6-text) !important;
     }
 
     .rfui-ready .task_text .olymp .up {
-      color: var(--rf6-cyan) !important;
-      text-shadow: 0 0 8px rgba(39,232,224,.4) !important;
+      color: #f04458 !important;
+      text-shadow: 0 0 8px rgba(240,43,67,.4) !important;
     }
 
-
     .rfui-ready .fixed-top {
-      background: rgba(9,7,17,.96) !important;
-      border-bottom: 1px solid rgba(255,45,135,.55) !important;
-      box-shadow: 0 5px 28px rgba(0,0,0,.55), 0 1px 14px rgba(255,45,135,.12) !important;
+      background: rgba(9,6,8,.97) !important;
+      border-bottom: 1px solid rgba(211,34,58,.48) !important;
+      box-shadow: 0 5px 28px rgba(0,0,0,.62), 0 1px 14px rgba(181,18,43,.13) !important;
     }
 
     .rfui-ready .container,
@@ -241,22 +256,23 @@
       display: flex !important;
       gap: 7px !important;
       flex-wrap: wrap !important;
-      border-bottom: 1px solid rgba(39,232,224,.32) !important;
+      border-bottom: 1px solid rgba(211,34,58,.32) !important;
     }
 
     .rfui-ready .container-location > h1 {
-      color: #fff !important;
-      font-weight: 800 !important;
-      letter-spacing: .035em !important;
-      text-shadow: 0 0 18px rgba(255,45,135,.42) !important;
+      color: #fff1f2 !important;
+      font-weight: 900 !important;
+      letter-spacing: .045em !important;
+      text-transform: uppercase !important;
+      text-shadow: 0 0 18px rgba(205,15,45,.42) !important;
     }
 
     .rfui-ready .container-location > h1 a {
-      color: var(--rf6-cyan) !important;
+      color: #e54a60 !important;
     }
 
     .rfui-ready .separator {
-      color: var(--rf6-pink) !important;
+      color: var(--rf6-pink2) !important;
     }
 
     .rfui-ready .tabcontent p,
@@ -283,7 +299,7 @@
     .rfui-ready .tab,
     .rfui-ready .tabcontent,
     .rfui-ready .enter {
-      -webkit-backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     @media (max-width: 700px) {
@@ -293,4 +309,3 @@
       .rfui-ready .enter input[name="code"] { width: 100% !important; }
       .rfui-ready .task_text table { display: block !important; max-width: 100% !important; overflow-x: auto !important; }
     }
-  
