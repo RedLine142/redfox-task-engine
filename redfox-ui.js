@@ -12,7 +12,7 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.3.0') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.4.0') return;
 
   var THEME = {
     background: '#080608',
@@ -37,7 +37,7 @@
       link.rel = 'stylesheet';
       (document.head || document.documentElement).appendChild(link);
     }
-    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.3.0-20261108';
+    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.4.0-20261108';
   }
 
   function applyTheme(options) {
@@ -92,13 +92,13 @@
   }
 
   window.RedFoxUI = {
-    version: '1.3.0',
+    version: '1.4.0',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
   };
   window.RedFox = {
-    version: '1.3.0',
+    version: '1.4.0',
     defaults: Object.assign({}, THEME),
     setTheme: applyTheme,
     refresh: refresh
