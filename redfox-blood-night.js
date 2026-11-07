@@ -119,6 +119,20 @@
       body.rf-blood-night .item:hover strong img {
         filter:saturate(1) contrast(1.15) brightness(1); transform:scale(1.06);
       }
+
+      /* Wide 852:242 artwork inside the game content */
+      body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) {
+        display:block; box-sizing:border-box; grid-column:1 / -1;
+        width:min(100%,852px); height:auto; aspect-ratio:852 / 242;
+        margin:14px auto !important; padding:0; overflow:hidden;
+      }
+      body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) > span {
+        display:block; width:100%; height:100%;
+      }
+      body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) img {
+        display:block; width:100% !important; height:100% !important;
+        max-width:none !important; aspect-ratio:852 / 242; object-fit:cover;
+      }
       body.rf-blood-night .item a > div:not(.progress) {
         color:#f4dfe3 !important; font-size:16px; font-weight:900;
         font-variant-numeric:tabular-nums; white-space:nowrap;
