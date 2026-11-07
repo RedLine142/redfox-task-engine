@@ -12,7 +12,7 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.6.2-no-extra-timer') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.6.3-found-codes-table') return;
 
   var THEME = {
     background: '#080608',
@@ -99,11 +99,62 @@
   }
 
 
+  function formatFoundCodes() {
+    if (!isPlayerPage) return;
+    var lists = document.querySelectorAll('.found-codes ul.found_codes, .found-codes .found_codes');
+    lists.forEach(function (list) {
+      if (!list.querySelector('.rf-found-codes-head')) {
+        var head = document.createElement('div');
+        head.className = 'rf-found-codes-head';
+        head.innerHTML =
+          '<span>ТИП</span>' +
+          '<span>КОД</span>' +
+          '<span>КОММЕНТАРИЙ</span>';
+        list.parentNode.insertBefore(head, list);
+      }
+
+      Array.prototype.forEach.call(list.querySelectorAll('li'), function (item) {
+        if (item.getAttribute('data-rf-codes-formatted') === '1') return;
+        var typeSource = item.querySelector('.class');
+        var codeSource = item.querySelector('.code');
+        if (!typeSource || !codeSource) return;
+
+        var typeText = (typeSource.textContent || '').trim();
+        var combined = (codeSource.textContent || '').trim();
+        if (!combined) return;
+
+        var splitAt = combined.search(/\\s/);
+        var codeText = splitAt < 0 ? combined : combined.slice(0, splitAt);
+        var commentText = splitAt < 0 ? '' : combined.slice(splitAt).trim();
+
+        var typeCell = document.createElement('span');
+        typeCell.className = 'class rf-found-type';
+        typeCell.textContent = typeText;
+
+        var codeCell = document.createElement('span');
+        codeCell.className = 'code rf-found-value';
+        codeCell.textContent = codeText;
+
+        var commentCell = document.createElement('span');
+        commentCell.className = 'rf-found-comment';
+        commentCell.textContent = commentText || '—';
+
+        item.textContent = '';
+        item.appendChild(typeCell);
+        item.appendChild(codeCell);
+        item.appendChild(commentCell);
+        item.setAttribute('data-rf-codes-formatted', '1');
+      });
+    });
+  }
+
+
   function refresh() {
     installStylesheet();
     document.documentElement.classList.add('rfui-ready');
     if (document.body) document.body.classList.add('rfui-ready');
     syncMobileCodeHeader();
+    formatFoundCodes();
     return true;
   }
 
@@ -116,7 +167,7 @@
   }
 
   window.RedFoxUI = {
-    version: '1.6.2-no-extra-timer',
+    version: '1.6.3-found-codes-table',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
@@ -140,6 +191,7 @@
     var observer = new MutationObserver(function () {
       if (!isPlayerPage) return;
       if (!document.getElementById('rfui-stylesheet')) installStylesheet();
+      formatFoundCodes();
       if (!document.documentElement.classList.contains('rfui-ready') ||
           (document.body && !document.body.classList.contains('rfui-ready'))) {
         refresh();
