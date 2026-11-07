@@ -5,6 +5,19 @@
 (function (window, document) {
   'use strict';
 
+  // Absolute first-line gate: this script is allowed only on the player's Safari cabinet.
+  // On every other URL, remove any remnants and stop before defining or running the theme.
+  var currentPath = window.location && window.location.pathname ? window.location.pathname : '';
+  if (!/^\/play\/safari\//i.test(currentPath)) {
+    document.documentElement.classList.remove('rf-blood-night');
+    if (document.body) document.body.classList.remove('rf-blood-night');
+    var staleStyle = document.getElementById('rf-blood-night-style');
+    if (staleStyle) staleStyle.parentNode.removeChild(staleStyle);
+    var staleParticles = document.querySelector('.rf-blood-particles');
+    if (staleParticles) staleParticles.parentNode.removeChild(staleParticles);
+    return;
+  }
+
   var STYLE_ID = 'rf-blood-night-style';
   var ROOT_CLASS = 'rf-blood-night';
   var PARTICLE_COUNT = 22;
