@@ -156,6 +156,9 @@
     var container = document.querySelector('.container-location');
     if (!container) return null;
 
+    // Keep the engine's original timer on the main game page; add a copy only where it is absent.
+    if (document.querySelector('.time #time_left, .time #timer')) return null;
+
     timerPanel = document.getElementById('rf-game-timer-panel');
     if (!timerPanel) {
       timerPanel = document.createElement('div');
