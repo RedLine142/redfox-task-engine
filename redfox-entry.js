@@ -1,11 +1,11 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.0.1-20261108';
+  var VERSION = '1.2.0-20261108';
   var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/';
   var modules = [
-    { id: 'rf-module-ui-v101', file: 'redfox-ui.js' },
-    { id: 'rf-module-functions-v101', file: 'redfox-functions.js' }
+    { id: 'rf-module-ui-v120', file: 'redfox-ui.js' },
+    { id: 'rf-module-functions-v120', file: 'redfox-functions.js' }
   ];
 
   if (window.RedFoxEngine && window.RedFoxEngine.version === VERSION) return;
@@ -24,11 +24,13 @@
       if (window.console && console.info) console.info('[RED FOX] Engine ready ' + VERSION);
       return;
     }
+
     var module = modules[index];
     if (document.getElementById(module.id)) {
       loadModule(index + 1);
       return;
     }
+
     var script = document.createElement('script');
     script.id = module.id;
     script.src = BASE + module.file + '?v=' + VERSION;
