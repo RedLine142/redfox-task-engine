@@ -210,13 +210,11 @@
   }
 
   function isGameCabinetPage() {
-    // Apply only to the player game-cabinet layout, never to admin pages.
-    return !!(
-      document.querySelector('.container .team_name') &&
-      document.querySelector('.container .item a[href*="/play/safari/"]') &&
-      document.querySelector('.time #time_left') &&
-      document.querySelector('table.locations')
-    );
+    // Strict URL gate: only player Safari pages. Admin pages are always excluded.
+    var path = window.location && window.location.pathname
+      ? window.location.pathname
+      : '';
+    return /^\/play\/safari\//i.test(path);
   }
 
   function init() {
