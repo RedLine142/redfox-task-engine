@@ -1,16 +1,8 @@
 (function (window, document) {
   'use strict';
 
-  var compactBreakStyle = document.getElementById('rf-nobr-break-style');
-  if (!compactBreakStyle) {
-    compactBreakStyle = document.createElement('style');
-    compactBreakStyle.id = 'rf-nobr-break-style';
-    compactBreakStyle.textContent = '.nobr br { display: none; }';
-    (document.head || document.documentElement).appendChild(compactBreakStyle);
-  }
-
-  var VERSION = '1.6.5-no-extra-timer-nobr-20261108';
-  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@1a422a1ef7ca083617b568f95a79d71d43dbdb06/';
+  var VERSION = '1.6.5-no-extra-timer-nobr-fix-20261108';
+  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@aa3a39bedc45764cf6e6bbcb7eab9943487b52ad/';
   var modules = [
     { id: 'rf-module-ui-v151', file: 'redfox-ui.js' },
     { id: 'rf-module-functions-v151', file: 'redfox-functions.js' }
