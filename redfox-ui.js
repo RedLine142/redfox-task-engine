@@ -40,14 +40,15 @@
     });
 
     if (validImageUrl(theme.backgroundImage)) {
-      root.style.setProperty('--rfui-bg-image', 'url("' + theme.backgroundImage.trim().replace(/["\\\\]/g, '') + '")');
-      root.classList.add('rfui-has-background-image');
+      var safeImageUrl = theme.backgroundImage.trim().replace(/[\\s"'()\\\\]/g, function (character) { return encodeURIComponent(character); });
+      root.style.setProperty('--rfui-bg-image', 'url("' + safeImageUrl + '")');
+      if (document.body) document.body.classList.add('rfui-has-background-image');
     } else {
       root.style.removeProperty('--rfui-bg-image');
-      root.classList.remove('rfui-has-background-image');
+      if (document.body) document.body.classList.remove('rfui-has-background-image');
     }
 
-    document.body.classList.add('rfui-ready');
+    if (document.body) document.body.classList.add('rfui-ready');
     return theme;
   }
 
