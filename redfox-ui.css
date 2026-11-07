@@ -584,3 +584,227 @@ html body.rfui-ready #message.neutral {
   html body.rfui-ready .tabs .tab { flex: 1 1 calc(50% - 4px) !important; }
   html body.rfui-ready .enter .non-fixed-input { flex-wrap: wrap !important; }
 }
+
+
+/* =========================================================
+   RED FOX — FRIDAY THE 13TH × HALLOWEEN
+   Visual layer only. Game engine and answer handling untouched.
+   ========================================================= */
+:root {
+  --rf6-bg: #070708;
+  --rf6-panel: rgba(17, 14, 16, .97);
+  --rf6-panel2: rgba(39, 13, 16, .96);
+  --rf6-text: #f3eeee;
+  --rf6-muted: #b9a9a6;
+  --rf6-pink: #9d1022;
+  --rf6-pink2: #d92732;
+  --rf6-cyan: #f28a24;
+  --rf6-border: rgba(181, 35, 37, .48);
+  --rf6-input: #0b090a;
+}
+html body.rfui-ready {
+  color: #f3eeee !important;
+  background-color: #070708 !important;
+  background-image:
+    radial-gradient(ellipse at 78% 8%, rgba(242,138,36,.13), transparent 23%),
+    radial-gradient(ellipse at 50% -10%, rgba(143,8,24,.3), transparent 48%),
+    radial-gradient(ellipse at 5% 65%, rgba(90,8,16,.18), transparent 32%),
+    linear-gradient(180deg,#100b0d 0%,#080708 58%,#030303 100%) !important;
+  background-attachment: fixed !important;
+  font-family: "Arial Narrow","Roboto Condensed",Arial,sans-serif !important;
+}
+html body.rfui-ready::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  opacity: .9;
+  background:
+    radial-gradient(circle at 82% 11%, rgba(255,155,63,.22) 0 2.2%, rgba(255,120,25,.08) 2.8%, transparent 13%),
+    linear-gradient(112deg, transparent 0 48%, rgba(155,15,24,.045) 49%, transparent 50% 100%),
+    radial-gradient(ellipse at 50% 100%,rgba(115,8,18,.16),transparent 55%);
+}
+html body.rfui-ready::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  opacity: .16 !important;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.035) 5px),
+    linear-gradient(90deg,rgba(0,0,0,.55),transparent 14%,transparent 86%,rgba(0,0,0,.55));
+}
+html body.rfui-ready > * { position: relative; z-index: 1; }
+
+html body.rfui-ready .fixed-top {
+  background: linear-gradient(90deg,rgba(5,5,6,.99),rgba(36,10,14,.98),rgba(5,5,6,.99)) !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(242,138,36,.62) !important;
+  box-shadow: 0 6px 32px rgba(0,0,0,.8),0 1px 18px rgba(157,16,34,.2) !important;
+}
+html body.rfui-ready .container-location > h1,
+html body.rfui-ready .task_text h1,
+html body.rfui-ready .task_text h2,
+html body.rfui-ready .task_text h3,
+html body.rfui-ready .task_text h4 {
+  color: #fff1e8 !important;
+  font-family: "Arial Narrow","Roboto Condensed",Arial,sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: .055em !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 0 #000,0 0 13px rgba(180,12,28,.5) !important;
+}
+html body.rfui-ready .container-location > h1 {
+  border-bottom: 1px solid rgba(242,138,36,.3);
+  padding-bottom: 10px;
+}
+html body.rfui-ready .enter {
+  color: #f3eeee !important;
+  background: linear-gradient(120deg,rgba(100,8,19,.42),rgba(17,13,14,.98) 58%) !important;
+  border: 1px solid rgba(180,35,37,.65) !important;
+  border-bottom: 3px solid #f28a24 !important;
+  border-radius: 2px !important;
+  box-shadow: 0 12px 34px rgba(0,0,0,.68),inset 0 1px rgba(255,255,255,.035) !important;
+}
+html body.rfui-ready .enter input,
+html body.rfui-ready .enter input[name="code"] {
+  color: #fff4ed !important;
+  background: linear-gradient(180deg,#171112,#080708) !important;
+  border: 1px solid rgba(190,55,37,.7) !important;
+  border-radius: 2px !important;
+}
+html body.rfui-ready .enter input:focus {
+  border-color: #f28a24 !important;
+  box-shadow: 0 0 0 2px rgba(242,138,36,.13),0 0 18px rgba(180,20,30,.2) !important;
+}
+html body.rfui-ready .enter button,
+html body.rfui-ready .enter button[type="submit"],
+html body.rfui-ready .enter input[type="submit"] {
+  color: #fff !important;
+  background: linear-gradient(110deg,#5b0815 0%,#a30e24 55%,#e65b1b 100%) !important;
+  border: 1px solid #f28a24 !important;
+  border-radius: 2px !important;
+  font-weight: 900 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 0 18px rgba(170,18,29,.28),inset 0 1px rgba(255,255,255,.12) !important;
+}
+html body.rfui-ready .enter button:hover,
+html body.rfui-ready .enter input[type="submit"]:hover {
+  background: linear-gradient(110deg,#861020,#c51c2b 55%,#ff842d) !important;
+  box-shadow: 0 0 24px rgba(242,91,36,.36) !important;
+}
+html body.rfui-ready .tabs > .wrapper {
+  gap: 6px !important;
+  border-bottom: 1px solid rgba(242,138,36,.32) !important;
+}
+html body.rfui-ready .tabs .tab,
+html body.rfui-ready .tab {
+  color: #cbbdb9 !important;
+  background: linear-gradient(180deg,#211518,#0a0809) !important;
+  border: 1px solid rgba(160,43,40,.42) !important;
+  border-radius: 2px 2px 0 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .075em !important;
+  font-weight: 800 !important;
+}
+html body.rfui-ready .tabs .tab:hover,
+html body.rfui-ready .tab:hover {
+  color: #fff !important;
+  border-color: #f28a24 !important;
+  text-shadow: 0 0 9px rgba(242,138,36,.38) !important;
+}
+html body.rfui-ready .tabs .tab.active,
+html body.rfui-ready .tab.active {
+  color: #fff !important;
+  background: linear-gradient(110deg,rgba(132,10,25,.55),rgba(87,31,12,.3)) !important;
+  border-color: #a30e24 !important;
+  border-bottom: 2px solid #f28a24 !important;
+  box-shadow: 0 -4px 20px rgba(180,25,22,.2) !important;
+}
+html body.rfui-ready .tabcontent {
+  color: #eee6e4 !important;
+  background: linear-gradient(145deg,rgba(29,17,19,.98),rgba(8,7,8,.99)) !important;
+  border: 1px solid rgba(165,35,32,.48) !important;
+  border-top: 1px solid rgba(242,138,36,.62) !important;
+  border-radius: 0 0 3px 3px !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.65),inset 0 1px rgba(255,255,255,.025) !important;
+}
+html body.rfui-ready .task_text,
+html body.rfui-ready .found-codes,
+html body.rfui-ready .found_codes,
+html body.rfui-ready .hints,
+html body.rfui-ready .location-codes { color: #eee6e4 !important; line-height: 1.7 !important; }
+html body.rfui-ready .task_text a,
+html body.rfui-ready .container-location > h1 a { color: #f28a24 !important; }
+html body.rfui-ready .task_text a:hover { color: #ffc078 !important; text-shadow: 0 0 10px rgba(242,138,36,.4) !important; }
+html body.rfui-ready .task_text blockquote {
+  color: #f0e4df !important;
+  background: linear-gradient(90deg,rgba(125,10,20,.2),rgba(180,65,15,.07)) !important;
+  border-left: 3px solid #f28a24 !important;
+  border-radius: 0 2px 2px 0 !important;
+}
+html body.rfui-ready .task_text hr { border: 0 !important; border-top: 1px solid rgba(242,138,36,.42) !important; }
+html body.rfui-ready .task_text img {
+  border: 1px solid rgba(190,45,35,.48) !important;
+  box-shadow: 0 8px 26px rgba(0,0,0,.58) !important;
+}
+html body.rfui-ready .task_text td,
+html body.rfui-ready .task_text th {
+  color: #eee6e4 !important;
+  background: rgba(17,11,12,.92) !important;
+  border: 1px solid rgba(170,40,30,.46) !important;
+}
+html body.rfui-ready .found_codes li,
+html body.rfui-ready ul.found_codes li {
+  color: #eee4e0 !important;
+  background: linear-gradient(135deg,rgba(67,17,20,.82),rgba(12,9,10,.98)) !important;
+  border: 1px solid rgba(180,45,35,.45) !important;
+  border-radius: 2px !important;
+  padding: 7px 10px !important;
+}
+html body.rfui-ready .hints li,
+html body.rfui-ready ul.hints li,
+html body.rfui-ready .location-codes li {
+  color: #eee3e1 !important;
+  background: rgba(38,20,20,.82) !important;
+  border-left: 2px solid #a30e24 !important;
+  padding: 9px 12px !important;
+}
+html body.rfui-ready #message.success {
+  color: #fff !important;
+  background: rgba(27,76,39,.95) !important;
+  border: 1px solid #68b879 !important;
+}
+html body.rfui-ready #message.error {
+  color: #fff !important;
+  background: rgba(112,9,22,.97) !important;
+  border: 1px solid #e34b45 !important;
+}
+html body.rfui-ready #message.neutral {
+  color: #fff0d5 !important;
+  background: rgba(106,61,12,.94) !important;
+  border: 1px solid #e39a36 !important;
+}
+html body.rfui-ready .separator { color: #f28a24 !important; }
+html body.rfui-ready .myElem {
+  color: #eee6e4 !important;
+  background: linear-gradient(145deg,#281116,#10090c) !important;
+  border: 1px solid rgba(165,30,38,.5) !important;
+}
+html body.rfui-ready .olymp td {
+  color: #eee6e4 !important;
+  background: rgba(255,255,255,.025) !important;
+  border-color: rgba(165,30,38,.5) !important;
+}
+html body.rfui-ready .olymp .up { color: #ff6942 !important; text-shadow: 0 0 8px rgba(255,75,36,.4) !important; }
+
+@media (max-width:700px) {
+  html body.rfui-ready .tabs > .wrapper { gap: 4px !important; }
+  html body.rfui-ready .tabs .tab { flex: 1 1 calc(50% - 4px) !important; text-align: center !important; }
+  html body.rfui-ready .enter .non-fixed-input { flex-wrap: wrap !important; }
+  html body.rfui-ready .enter button,
+  html body.rfui-ready .enter input[type="submit"] { width: 100% !important; }
+}
