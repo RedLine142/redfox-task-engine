@@ -76,10 +76,33 @@
     return theme;
   }
 
+  function syncMobileCodeHeader() {
+    if (!document.body || !window.matchMedia || !window.matchMedia('(max-width: 700px)').matches) {
+      var desktopHeader = document.querySelector('.fixed-top');
+      var desktopContent = document.querySelector('.container-location');
+      if (desktopHeader) desktopHeader.style.removeProperty('height');
+      if (desktopContent) desktopContent.style.removeProperty('margin-top');
+      return;
+    }
+
+    var header = document.querySelector('.fixed-top');
+    var content = document.querySelector('.container-location');
+    if (!header || !content) return;
+
+    header.style.removeProperty('height');
+    var requiredHeight = Math.ceil(header.scrollHeight);
+    if (!requiredHeight) return;
+
+    header.style.setProperty('height', requiredHeight + 'px', 'important');
+    header.style.setProperty('bottom', 'auto', 'important');
+    content.style.setProperty('margin-top', requiredHeight + 'px', 'important');
+  }
+
   function refresh() {
     installStylesheet();
     document.documentElement.classList.add('rfui-ready');
     if (document.body) document.body.classList.add('rfui-ready');
+    syncMobileCodeHeader();
     return true;
   }
 
@@ -109,6 +132,8 @@
   } else {
     init();
   }
+
+  window.addEventListener('resize', syncMobileCodeHeader, { passive: true });
 
   if (window.MutationObserver && document.documentElement) {
     var observer = new MutationObserver(function () {
