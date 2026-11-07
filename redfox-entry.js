@@ -1,8 +1,8 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.5.6-home-button-label-20261108';
-  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@f6691f095fb3f8fb5bd172324e3dda5d61589560/';
+  var VERSION = '1.6.0-persistent-game-timer-20261108';
+  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@eb57df30200e359096ddb5b0242568e4f18bbc8a/';
   var modules = [
     { id: 'rf-module-ui-v151', file: 'redfox-ui.js' },
     { id: 'rf-module-functions-v151', file: 'redfox-functions.js' }
