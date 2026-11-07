@@ -14,7 +14,7 @@
       link = document.createElement('link');
       link.id = 'rfui-stylesheet';
       link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.0.0';
+      link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=20261108-0215';
       (document.head || document.documentElement).appendChild(link);
     }
   }
