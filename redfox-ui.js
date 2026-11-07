@@ -37,7 +37,7 @@
       link.rel = 'stylesheet';
       (document.head || document.documentElement).appendChild(link);
     }
-    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@6d874561074baf17e7d7447777f7d990795f68af/redfox-ui.css';
+    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@fb5e810e3a5c71946d260df2ba238f74958655f9/redfox-ui.css';
   }
 
   function applyTheme(options) {
