@@ -12,19 +12,19 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.2.0') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.3.0') return;
 
   var THEME = {
     background: '#080608',
-    panel: 'rgba(24, 13, 17, .96)',
-    panelSoft: 'rgba(55, 12, 25, .92)',
-    text: '#f6e9eb',
-    muted: '#b99da3',
-    accent: '#b5122b',
-    accentHover: '#f02b43',
-    cyan: '#e54a60',
-    border: 'rgba(211, 34, 58, .38)',
-    inputBackground: '#10090d',
+    panel: 'rgba(18, 14, 15, .97)',
+    panelSoft: 'rgba(62, 13, 18, .94)',
+    text: '#f4eeee',
+    muted: '#b8a5a0',
+    accent: '#a30e24',
+    accentHover: '#ff4b24',
+    cyan: '#f28a24',
+    border: 'rgba(190, 35, 35, .42)',
+    inputBackground: '#100c0c',
     backgroundImage: '',
     fontFamily: '"Arial Narrow", "Roboto Condensed", Arial, sans-serif'
   };
@@ -35,9 +35,9 @@
       link = document.createElement('link');
       link.id = 'rfui-stylesheet';
       link.rel = 'stylesheet';
-      link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.2.0-20261108';
       (document.head || document.documentElement).appendChild(link);
     }
+    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.3.0-20261108';
   }
 
   function applyTheme(options) {
@@ -92,13 +92,13 @@
   }
 
   window.RedFoxUI = {
-    version: '1.2.0',
+    version: '1.3.0',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
   };
   window.RedFox = {
-    version: '1.2.0',
+    version: '1.3.0',
     defaults: Object.assign({}, THEME),
     setTheme: applyTheme,
     refresh: refresh
