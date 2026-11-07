@@ -1,11 +1,11 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.3.0-20261108';
+  var VERSION = '1.4.0-20261108';
   var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/';
   var modules = [
-    { id: 'rf-module-ui-v130', file: 'redfox-ui.js' },
-    { id: 'rf-module-functions-v130', file: 'redfox-functions.js' }
+    { id: 'rf-module-ui-v140', file: 'redfox-ui.js' },
+    { id: 'rf-module-functions-v140', file: 'redfox-functions.js' }
   ];
 
   if (window.RedFoxEngine && window.RedFoxEngine.version === VERSION) return;
