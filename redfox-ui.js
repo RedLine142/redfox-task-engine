@@ -12,7 +12,7 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.5.0-halloween') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.5.1-halloween') return;
 
   var THEME = {
     background: '#080608',
@@ -37,7 +37,7 @@
       link.rel = 'stylesheet';
       (document.head || document.documentElement).appendChild(link);
     }
-    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.5.0-halloween';
+    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css?v=1.5.1-halloween-20261108';
   }
 
   function applyTheme(options) {
@@ -92,7 +92,7 @@
   }
 
   window.RedFoxUI = {
-    version: '1.5.0-halloween',
+    version: '1.5.1-halloween',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
