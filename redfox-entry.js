@@ -1,8 +1,8 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.6.3-inline-game-timer-20261108';
-  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@5530a3b0b3dcdb387f96243b38b525483264f7ae/';
+  var VERSION = '1.6.4-inline-game-timer-20261108';
+  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@ea7293829de1df1aee23b549b748252453223984/';
   var modules = [
     { id: 'rf-module-ui-v151', file: 'redfox-ui.js' },
     { id: 'rf-module-functions-v151', file: 'redfox-functions.js' }
