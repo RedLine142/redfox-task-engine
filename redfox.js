@@ -10,7 +10,7 @@
     if (document.getElementById(module.id)) { if (done) done(); return; }
     var script = document.createElement('script');
     script.id = module.id;
-    script.src = BASE + module.file;
+    script.src = BASE + module.file + '?v=1.0.0';
     script.async = false;
     script.onload = function () {
       if (window.console && console.info) console.info('[RED FOX] Loaded ' + module.file);
