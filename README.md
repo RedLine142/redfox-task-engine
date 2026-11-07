@@ -1,79 +1,86 @@
-# RED FOX UI / Task Engine
+# RED FOX ENGINE
 
-A presentation extension for existing RED FOX / Encounter player pages. It does not replace the game engine or its answer checker.
+Our own modular JavaScript library for the RED FOX / Encounter player page.
 
-## Install
+The main entry point loads our modules from this repository:
 
-Keep the existing task-engine files and add the UI files to the player page:
+- `redfox.js` — main loader and public engine entry point.
+- `redfox-ui.js` — theme setup and UI initialization.
+- `redfox-ui.css` — GTA VI / Vice City visual theme.
+- `redfox-functions.js` — migrated task helpers previously provided by `ForRado42.js`.
+
+## Installation
+
+Keep jQuery loaded first. Remove the old `ForRado42.js` include and use only the RED FOX entry point:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-task-engine.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.css">
-
-<script src="https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-task-engine.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<p class="noCodesTab"><em><strong>Задание:</strong></em></p>
+<script src="https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox.js"></script>
 ```
 
-Load the stylesheets before the scripts. The existing task-engine script and its API remain available.
+The main loader loads `redfox-ui.js` and then `redfox-functions.js`. The UI module loads `redfox-ui.css`.
 
-## RED FOX DARK theme
+Do not load `ForRado42.js` alongside the new functions module: both would process the same task markup and could duplicate or conflict with changes.
 
-The UI module applies the RED FOX DARK theme to known player-page elements, including the code-entry form, tabs, task text, hints, found-code panel and location-code panel.
+## Migrated legacy functionality
 
-Optional customization can be declared before loading `redfox-ui.js`:
+`redfox-functions.js` contains the migrated helpers for:
+
+- custom `.style` blocks inside `.task_text`;
+- no-break text (`.nobr`);
+- tournament brackets: `8`, `r8`, `16`, `r16`, and `32`;
+- `.sTask`, `.aTask`, `.rTask`, and `.pTask` markers;
+- `.oTaskInit`, `.oTask`, and `.oTasks` bracket data;
+- image sliders (`.slider-container`);
+- numeric Unicode emoji (`.emoji`);
+- random list selection (`.randList` and `.rand`);
+- automatic task-tab activation via `.noCodesTab`;
+- responsive image maps when the `rwdImageMaps` jQuery plugin is present.
+
+The public functions API is available as `window.RedFoxFunctions`:
+
+```javascript
+RedFoxFunctions.refresh();
+RedFoxFunctions.createOlymp('8');
+```
+
+The bracket helper is also exposed as `window.createOlymp` for compatibility.
+
+## UI customization
+
+The UI API is available as `window.RedFoxUI` and `window.RedFox`:
+
+```javascript
+RedFox.setTheme({
+  accent: '#ff2d87',
+  cyan: '#27e8e0',
+  background: '#090711'
+});
+```
+
+Call `RedFox.refresh()` to re-apply the UI-ready classes and stylesheet link.
+
+A configuration object can be declared before loading the main entry:
 
 ```html
 <script>
 window.RFUI_CONFIG = {
   theme: {
-    background: "#101216",
-    panel: "#191d24",
-    panelSoft: "#202630",
-    text: "#f1f3f5",
-    muted: "#a6adb8",
-    accent: "#e53935",
-    accentHover: "#ff514b",
-    border: "#343b46",
-    inputBackground: "#11151b",
-    backgroundImage: ""
+    background: '#090711',
+    panel: '#171020',
+    panelSoft: '#24142d',
+    accent: '#ff2d87',
+    accentHover: '#ff62b0',
+    cyan: '#27e8e0'
   }
 };
 </script>
 ```
 
-Use an absolute HTTP(S) image URL for `backgroundImage`. Leave it empty to use a solid dark background.
+## Development rules
 
-The theme can also be changed after initialization:
-
-```javascript
-RedFoxUI.applyTheme({
-  accent: "#e53935",
-  background: "#101216",
-  backgroundImage: "https://example.com/background.jpg"
-});
-```
-
-Call `RedFoxUI.refresh()` to re-apply the UI-ready body class after dynamic page changes.
-
-## Existing task markup
-
-Use matching task and answer IDs, for example `T1` and `A1`:
-
-```html
-<div class="myContainer">
-  <div class="myElem">
-    <div class="taskEl" id="T1">Task text</div>
-    <span class="answerEl" id="A1"></span>
-  </div>
-</div>
-```
-
-## Existing task API
-
-After the existing game checker confirms an answer, call `markAnswerCorrect(1)`. The task will be dimmed and `ВЕРНО` will appear.
-
-For several tasks, call `markTasksCorrect([1, 2, 3])`.
-
-## Compatibility
-
-The UI module is presentation-only. It does not validate answers, submit codes, change game progress, or replace Encounter's server-side behavior. The existing task-engine functions are kept separate from the new UI theme.
+- Keep game submission and server-side answer checking on the platform; this library only handles client-side task helpers and presentation.
+- Keep features in separate modules. UI changes belong in `redfox-ui.js` / `redfox-ui.css`; task behavior belongs in `redfox-functions.js`.
+- Add future optional features as separate modules and register them in `redfox.js`.
+- Test against a real task page before removing compatibility code or changing legacy markup assumptions.
