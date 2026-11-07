@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  if (window.RedFox && window.RedFox.version === '0.2.0') return;
+  if (window.RedFox && window.RedFox.version === '0.3.0') return;
 
   var THEME = {
     background: '#090711',
@@ -64,7 +64,7 @@
   }
 
   window.RedFox = {
-    version: '0.2.0',
+    version: '0.3.0',
     setTheme: applyTheme,
     refresh: activate,
     defaults: Object.assign({}, THEME)
@@ -91,4 +91,23 @@
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
   }
+
+  function loadModule(src, id) {
+    if (document.getElementById(id)) return;
+    var script = document.createElement('script');
+    script.id = id;
+    script.src = src;
+    script.async = false;
+    script.onload = function () {
+      if (window.console && console.info) console.info('[RED FOX] Module loaded:', id);
+    };
+    script.onerror = function () {
+      if (window.console && console.error) console.error('[RED FOX] Module failed to load:', src);
+    };
+    (document.head || document.documentElement).appendChild(script);
+  }
+
+  // Load our own task functions module. Keep jQuery on the page before redfox.js.
+  loadModule('https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/redfox-functions.js', 'rf-module-functions');
+
 })(window, document);
