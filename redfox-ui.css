@@ -907,3 +907,63 @@ html body.rfui-ready .location-codes .found {
   text-shadow: 0 0 7px rgba(255, 174, 91, .48) !important;
   box-shadow: 0 0 9px rgba(220, 55, 30, .24), inset 0 1px rgba(255,255,255,.14) !important;
 }
+
+
+/* RED FOX — clear return-to-directory button */
+html body.rfui-ready .container-location > h1 > a[href="/play/safari/"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 9px !important;
+  min-height: 40px !important;
+  margin: 0 8px 8px 0 !important;
+  padding: 9px 15px !important;
+  color: #fff4ed !important;
+  background: linear-gradient(110deg, #650b19 0%, #a30e24 58%, #d94b1d 100%) !important;
+  border: 1px solid #f28a24 !important;
+  border-left: 4px solid #ff9a32 !important;
+  border-radius: 3px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,.45), 0 0 14px rgba(190,35,25,.22) !important;
+  text-decoration: none !important;
+  vertical-align: middle !important;
+  transition: background .2s ease, box-shadow .2s ease, transform .2s ease !important;
+}
+html body.rfui-ready .container-location > h1 > a[href="/play/safari/"] svg {
+  display: none !important;
+}
+html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]::before {
+  content: "←" !important;
+  display: inline-block !important;
+  color: #ffbd72 !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+}
+html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]::after {
+  content: "НАЗАД В ДЕРРИКТОРИЮ" !important;
+  display: inline-block !important;
+  color: #fff4ed !important;
+  font-family: "Arial Narrow","Roboto Condensed",Arial,sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  font-weight: 900 !important;
+  letter-spacing: .075em !important;
+  text-transform: uppercase !important;
+}
+html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]:hover {
+  color: #fff !important;
+  background: linear-gradient(110deg, #861020 0%, #c51c2b 58%, #ff7628 100%) !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,.55), 0 0 20px rgba(242,91,36,.4) !important;
+  transform: translateY(-1px) !important;
+}
+@media (max-width: 700px) {
+  html body.rfui-ready .container-location > h1 > a[href="/play/safari/"] {
+    min-height: 38px !important;
+    margin: 0 6px 7px 0 !important;
+    padding: 8px 11px !important;
+  }
+  html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]::after {
+    font-size: 11px !important;
+    letter-spacing: .055em !important;
+  }
+}
