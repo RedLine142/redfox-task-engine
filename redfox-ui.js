@@ -103,7 +103,7 @@
   var timerInterval = null;
 
   function parseClock(value) {
-    var match = String(value || '').trim().match(/^(?:(\\d+)\\s*д\\.\\s*)?(\\d{1,3}):(\\d{2}):(\\d{2})$/i);
+    var match = String(value || '').trim().match(/^(?:(\d+)\s*д\.\s*)?(\d{1,3}):(\d{2}):(\d{2})$/i);
     if (!match) return null;
     return (Number(match[1] || 0) * 86400) +
       (Number(match[2]) * 3600) + (Number(match[3]) * 60) + Number(match[4]);
