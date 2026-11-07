@@ -1,8 +1,8 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.6.7-found-codes-table-20261108';
-  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@15ffea366910b1d09ad2b185ad4cbf4c00b0834c/';
+  var VERSION = '1.6.5-no-extra-timer-20261108';
+  var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@1a422a1ef7ca083617b568f95a79d71d43dbdb06/';
   var modules = [
     { id: 'rf-module-ui-v151', file: 'redfox-ui.js' },
     { id: 'rf-module-functions-v151', file: 'redfox-functions.js' }
