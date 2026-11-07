@@ -940,7 +940,7 @@ html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]::before 
   font-weight: 900 !important;
 }
 html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]::after {
-  content: "НАЗАД" !important;
+  content: "ДОМОЙ" !important;
   display: inline-block !important;
   color: #fff4ed !important;
   font-family: "Arial Narrow","Roboto Condensed",Arial,sans-serif !important;
