@@ -892,3 +892,18 @@ html body.rfui-ready .enter input[type="submit"] {
     overflow: visible !important;
   }
 }
+
+
+/* RED FOX — mark codes already found on the location */
+html body.rfui-ready .location-codes .found {
+  display: inline-block !important;
+  padding: 1px 6px !important;
+  margin: 0 1px !important;
+  color: #fff4df !important;
+  background: linear-gradient(135deg, rgba(145, 12, 27, .96), rgba(220, 82, 25, .9)) !important;
+  border: 1px solid rgba(255, 174, 91, .85) !important;
+  border-radius: 3px !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 7px rgba(255, 174, 91, .48) !important;
+  box-shadow: 0 0 9px rgba(220, 55, 30, .24), inset 0 1px rgba(255,255,255,.14) !important;
+}
