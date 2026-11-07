@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.4.0-20261108';
+  var VERSION = '1.5.0-halloween-20261108';
   var BASE = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@main/';
   var modules = [
     { id: 'rf-module-ui-v140', file: 'redfox-ui.js' },
