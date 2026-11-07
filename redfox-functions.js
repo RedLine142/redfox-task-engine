@@ -38,9 +38,9 @@
       var rowSpan = Math.pow(2, round);
       var sectorCount = count / rowSpan;
       for (var i = 0; i < sectorCount; i++) {
-        var sectorNumber = count + (count / 2) * (1 - 1 / rowSpan) + i;
+        var sectorNumber;
         if (round === 0) sectorNumber = i + 1;
-        else sectorNumber = count + (count / 2) * (1 - 1 / rowSpan) + i + 1;
+        else sectorNumber = count + count - (2 * count / rowSpan) + i + 1;
         cells.push({
           id: 'olymp' + sectorNumber,
           label: 'Sector ' + sectorNumber,
@@ -54,8 +54,9 @@
     for (var row = 0; row < count; row++) {
       html += '<tr>';
       for (var col = 0; col < columns.length; col++) {
-        if (row % Math.pow(2, col) === 0) {
-          var cell = columns[col][Math.floor(row / Math.pow(2, col))];
+        var sourceCol = reverse ? columns.length - 1 - col : col;
+        if (row % Math.pow(2, sourceCol) === 0) {
+          var cell = columns[sourceCol][Math.floor(row / Math.pow(2, sourceCol))];
           if (cell) {
             html += '<td id="' + cell.id + '" rowspan="' + cell.rowspan + '">' + cell.label + '</td>';
           }
@@ -66,16 +67,6 @@
     html += '</tbody></table>';
     if (reverse) {
       html = html.replace('<table class="olymp rf-olymp">', '<table class="olymp rf-olymp rf-olymp-reverse">');
-      var rows = [];
-      var temp = document.createElement('div');
-      temp.innerHTML = html;
-      var table = temp.firstChild;
-      Array.prototype.forEach.call(table.rows, function (tr) {
-        var cells = Array.prototype.slice.call(tr.cells).reverse();
-        tr.innerHTML = '';
-        cells.forEach(function (cell) { tr.appendChild(cell); });
-      });
-      html = temp.innerHTML;
     }
     return html;
   }
