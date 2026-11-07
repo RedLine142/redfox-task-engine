@@ -1,0 +1,7 @@
+.task_text .myContainer{display:flex;flex-direction:column;gap:8px}
+.task_text .myElem{display:flex;align-items:stretch;justify-content:space-between;gap:12px;padding:12px 14px;background:#151b19;border:1px solid #28734b;border-radius:8px;color:#eee}
+.task_text .myElem .taskEl{flex:1;min-width:0}
+.task_text .myElem .answerEl,.task_text .myElem .rfte-answer{flex:0 0 auto;align-self:center;color:#54d98b;font-weight:800;text-align:right}
+.task_text .myElem.rfte-solved{background:#101512;border-color:#244b35}
+.task_text .myElem.rfte-solved .taskEl{opacity:.25}
+@media(max-width:600px){.task_text .myElem{padding:10px;gap:8px}}
