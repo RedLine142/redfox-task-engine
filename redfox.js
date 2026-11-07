@@ -237,6 +237,75 @@
       text-shadow: 0 0 8px rgba(39,232,224,.4) !important;
     }
 
+
+    .rfui-ready .fixed-top {
+      background: rgba(9,7,17,.96) !important;
+      border-bottom: 1px solid rgba(255,45,135,.55) !important;
+      box-shadow: 0 5px 28px rgba(0,0,0,.55), 0 1px 14px rgba(255,45,135,.12) !important;
+    }
+
+    .rfui-ready .container,
+    .rfui-ready .container-location {
+      color: var(--rf6-text) !important;
+    }
+
+    .rfui-ready .container-location {
+      background: transparent !important;
+    }
+
+    .rfui-ready .tabs {
+      background: transparent !important;
+    }
+
+    .rfui-ready .tabs > .wrapper {
+      display: flex !important;
+      gap: 7px !important;
+      flex-wrap: wrap !important;
+      border-bottom: 1px solid rgba(39,232,224,.32) !important;
+    }
+
+    .rfui-ready .container-location > h1 {
+      color: #fff !important;
+      font-weight: 800 !important;
+      letter-spacing: .035em !important;
+      text-shadow: 0 0 18px rgba(255,45,135,.42) !important;
+    }
+
+    .rfui-ready .container-location > h1 a {
+      color: var(--rf6-cyan) !important;
+    }
+
+    .rfui-ready .separator {
+      color: var(--rf6-pink) !important;
+    }
+
+    .rfui-ready .tabcontent p,
+    .rfui-ready .tabcontent li,
+    .rfui-ready .tabcontent strong,
+    .rfui-ready .tabcontent em {
+      color: inherit;
+    }
+
+    .rfui-ready .tabcontent.task {
+      min-height: 120px;
+    }
+
+    .rfui-ready .enter .non-fixed-input {
+      display: flex !important;
+      align-items: center !important;
+      gap: 9px !important;
+    }
+
+    .rfui-ready .enter input[name="code"] {
+      flex: 1 1 auto !important;
+    }
+
+    .rfui-ready .tab,
+    .rfui-ready .tabcontent,
+    .rfui-ready .enter {
+      -webkit-backdrop-filter: blur(14px);
+    }
+
     @media (max-width: 700px) {
       .rfui-ready .tabcontent { padding: 12px !important; }
       .rfui-ready .enter { padding: 9px !important; }
@@ -283,6 +352,7 @@
   function activate() {
     installStyles();
     if (!document.body) return;
+    document.documentElement.classList.add('rfui-ready');
     document.body.classList.add('rfui-ready');
     var config = window.RFUI_CONFIG || {};
     applyTheme(config.theme || config);
@@ -311,7 +381,7 @@
   // Some task pages insert their contents after the initial page load.
   if (window.MutationObserver && document.documentElement) {
     var observer = new MutationObserver(function () {
-      if (document.body && !document.body.classList.contains('rfui-ready')) activate();
+      if (document.body && (!document.body.classList.contains('rfui-ready') || !document.documentElement.classList.contains('rfui-ready'))) activate();
       if (!document.getElementById('rfui-styles')) installStyles();
     });
     observer.observe(document.documentElement, { childList: true, subtree: true });
