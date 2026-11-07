@@ -227,7 +227,7 @@
     if (initialized) return;
     initialized = true;
 
-    addStyle('rf-functions-base-styles', '.task_text .nobr br{display:none}');
+    addStyle('rf-functions-base-styles', '.nobr br{display:none!important}');
     processCustomStyles();
     $('.sTask,.aTask,.rTask,.pTask').hide();
     processCodeMarkers();
