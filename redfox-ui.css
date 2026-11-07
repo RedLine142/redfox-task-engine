@@ -967,3 +967,86 @@ html body.rfui-ready .container-location > h1 > a[href="/play/safari/"]:hover {
     letter-spacing: .055em !important;
   }
 }
+
+/* RED FOX — found codes as readable three-column rows */
+html body.rfui-ready .found-codes .rf-found-codes-head,
+html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"] {
+  display: grid !important;
+  grid-template-columns: minmax(76px, .7fr) minmax(110px, 1fr) minmax(150px, 2fr) !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+html body.rfui-ready .found-codes .rf-found-codes-head {
+  margin: 8px 0 0 !important;
+  padding: 8px 0 !important;
+  color: #f28a24 !important;
+  background: rgba(91, 13, 22, .72) !important;
+  border: 1px solid rgba(242, 138, 36, .48) !important;
+  border-bottom: 2px solid #a30e24 !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: .12em !important;
+}
+html body.rfui-ready .found-codes .rf-found-codes-head span,
+html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"] > span {
+  display: flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  padding: 8px 11px !important;
+  border-right: 1px solid rgba(190, 75, 54, .35) !important;
+  overflow-wrap: anywhere !important;
+  white-space: normal !important;
+}
+html body.rfui-ready .found-codes .rf-found-codes-head span:last-child,
+html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"] > span:last-child {
+  border-right: 0 !important;
+}
+html body.rfui-ready .found-codes ul.found_codes {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"] {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid rgba(180, 45, 35, .4) !important;
+  border-top: 0 !important;
+  border-radius: 0 !important;
+  background: linear-gradient(100deg, rgba(53, 15, 19, .94), rgba(15, 11, 12, .98)) !important;
+}
+html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"]:nth-child(even) {
+  background: linear-gradient(100deg, rgba(37, 14, 17, .96), rgba(21, 13, 14, .98)) !important;
+}
+html body.rfui-ready .found-codes ul.found_codes li .rf-found-type {
+  color: #ffb15b !important;
+  font-weight: 900 !important;
+}
+html body.rfui-ready .found-codes ul.found_codes li .rf-found-value {
+  color: #fff3e9 !important;
+  font-weight: 900 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+html body.rfui-ready .found-codes ul.found_codes li .rf-found-comment {
+  color: #cbbab5 !important;
+  font-size: .94em !important;
+}
+@media (max-width: 700px) {
+  html body.rfui-ready .found-codes .rf-found-codes-head,
+  html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"] {
+    grid-template-columns: minmax(52px, .65fr) minmax(76px, .9fr) minmax(90px, 1.6fr) !important;
+  }
+  html body.rfui-ready .found-codes .rf-found-codes-head {
+    font-size: 9px !important;
+    letter-spacing: .06em !important;
+  }
+  html body.rfui-ready .found-codes .rf-found-codes-head span,
+  html body.rfui-ready .found-codes ul.found_codes li[data-rf-codes-formatted="1"] > span {
+    padding: 7px 6px !important;
+    font-size: 12px !important;
+  }
+}
