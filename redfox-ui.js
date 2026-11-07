@@ -12,7 +12,7 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.5.1-halloween') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.5.2-found-highlight') return;
 
   var THEME = {
     background: '#080608',
@@ -37,7 +37,7 @@
       link.rel = 'stylesheet';
       (document.head || document.documentElement).appendChild(link);
     }
-    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@2ad802042b4e66376ccc0ce328fcc05ca12a1c3b/redfox-ui.css';
+    link.href = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@d0037025286ddab80a6489be9fe857469860155a/redfox-ui.css';
   }
 
   function applyTheme(options) {
@@ -115,7 +115,7 @@
   }
 
   window.RedFoxUI = {
-    version: '1.5.1-halloween',
+    version: '1.5.2-found-highlight',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
