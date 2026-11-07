@@ -209,8 +209,19 @@
     document.body.appendChild(layer);
   }
 
+  function isGameCabinetPage() {
+    // Apply only to the player game-cabinet layout, never to admin pages.
+    return !!(
+      document.querySelector('.container .team_name') &&
+      document.querySelector('.container .item a[href*="/play/safari/"]') &&
+      document.querySelector('.time #time_left') &&
+      document.querySelector('table.locations')
+    );
+  }
+
   function init() {
     if (!document.body || document.body.classList.contains(ROOT_CLASS)) return;
+    if (!isGameCabinetPage()) return;
     addStyles();
     document.documentElement.classList.add(ROOT_CLASS);
     document.body.classList.add(ROOT_CLASS);
