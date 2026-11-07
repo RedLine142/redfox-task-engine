@@ -8,7 +8,7 @@
   // Absolute first-line gate: this script is allowed only on the player's Safari cabinet.
   // On every other URL, remove any remnants and stop before defining or running the theme.
   var currentPath = window.location && window.location.pathname ? window.location.pathname : '';
-  if (!/^\/play\/safari(?:\/|$)/i.test(currentPath)) {
+  if (!/^\/play\/safari\/?$/i.test(currentPath)) {
     document.documentElement.classList.remove('rf-blood-night');
     if (document.body) document.body.classList.remove('rf-blood-night');
     var staleStyle = document.getElementById('rf-blood-night-style');
@@ -227,7 +227,7 @@
     var path = window.location && window.location.pathname
       ? window.location.pathname
       : '';
-    return /^\/play\/safari\//i.test(path);
+    return /^\/play\/safari\/?$/i.test(path);
   }
 
   function disableTheme() {
