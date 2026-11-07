@@ -12,7 +12,7 @@
     return;
   }
 
-  if (window.RedFoxUI && window.RedFoxUI.version === '1.6.0-persistent-game-timer') return;
+  if (window.RedFoxUI && window.RedFoxUI.version === '1.6.1-inline-game-timer') return;
 
   var THEME = {
     background: '#080608',
@@ -153,28 +153,25 @@
 
   function ensureTimerPanel() {
     if (!document.body) return null;
-    if (timerPanel && document.body.contains(timerPanel)) return timerPanel;
+    var container = document.querySelector('.container-location');
+    if (!container) return null;
 
     timerPanel = document.getElementById('rf-game-timer-panel');
-    if (timerPanel) return timerPanel;
+    if (!timerPanel) {
+      timerPanel = document.createElement('div');
+      timerPanel.id = 'rf-game-timer-panel';
+      timerPanel.className = 'time rf-game-timer-inflow';
+      timerPanel.setAttribute('aria-live', 'off');
+      timerPanel.innerHTML =
+        '<div class="wrapper">' +
+          '<div class="level_time">До конца: <span data-rf-time-left>—</span></div>' +
+          '<div class="timer"><span data-rf-timer>—</span></div>' +
+        '</div>';
+    }
 
-    timerPanel = document.createElement('div');
-    timerPanel.id = 'rf-game-timer-panel';
-    timerPanel.setAttribute('aria-live', 'off');
-    timerPanel.innerHTML =
-      '<div class="rf-game-timer-inner">' +
-        '<div class="rf-game-timer-item rf-game-timer-left">' +
-          '<span class="rf-game-timer-caption">ДО КОНЦА ИГРЫ</span>' +
-          '<strong class="rf-game-timer-value" data-rf-time-left>—</strong>' +
-        '</div>' +
-        '<div class="rf-game-timer-divider"></div>' +
-        '<div class="rf-game-timer-item rf-game-timer-elapsed">' +
-          '<span class="rf-game-timer-caption">ВРЕМЯ ИГРЫ</span>' +
-          '<strong class="rf-game-timer-value" data-rf-timer>—</strong>' +
-        '</div>' +
-      '</div>';
-    document.body.appendChild(timerPanel);
-    document.body.classList.add('rfui-has-game-timer');
+    if (timerPanel.previousElementSibling !== container) {
+      container.insertAdjacentElement('afterend', timerPanel);
+    }
     return timerPanel;
   }
 
@@ -229,7 +226,7 @@
   }
 
   window.RedFoxUI = {
-    version: '1.6.0-persistent-game-timer',
+    version: '1.6.1-inline-game-timer',
     defaults: Object.assign({}, THEME),
     applyTheme: applyTheme,
     refresh: refresh
