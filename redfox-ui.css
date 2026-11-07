@@ -879,3 +879,33 @@ html body.rfui-ready .enter input[type="submit"] {
     width: 100% !important;
   }
 }
+
+
+/* RED FOX — responsive header flow: prevent the code form from escaping fixed header */
+@media (max-width: 1100px) {
+  html body.rfui-ready .fixed-top {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  html body.rfui-ready .fixed-top .enter {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    margin: 12px 0 !important;
+  }
+
+  html body.rfui-ready .container-location {
+    margin-top: 0 !important;
+  }
+}
