@@ -120,6 +120,31 @@
         filter:saturate(1) contrast(1.15) brightness(1); transform:scale(1.06);
       }
 
+      /* Special wide artwork: preserve the 852:242 banner proportions */
+      body.rf-blood-night .item strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) {
+        grid-column:1 / -1 !important;
+        display:block !important;
+        box-sizing:border-box !important;
+        width:min(100%,852px) !important;
+        height:auto !important;
+        aspect-ratio:852 / 242 !important;
+        margin:4px auto 12px !important;
+        overflow:hidden !important;
+      }
+      body.rf-blood-night .item strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) > span {
+        display:block !important;
+        width:100% !important;
+        height:100% !important;
+      }
+      body.rf-blood-night .item strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) img {
+        display:block !important;
+        width:100% !important;
+        max-width:none !important;
+        height:100% !important;
+        aspect-ratio:852 / 242 !important;
+        object-fit:contain !important;
+      }
+
       /* Wide 852:242 artwork inside the game content */
       body.rf-blood-night .container strong:has(img[src*="/static/up/images/virtualka-YAkimchuk/123/11.png"]) {
         display:block; box-sizing:border-box; grid-column:1 / -1;
