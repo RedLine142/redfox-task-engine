@@ -18,7 +18,7 @@
     fontFamily: 'Arial, Helvetica, sans-serif'
   };
 
-  var CSS = \`
+  var CSS = `
     :root {
       --rf6-bg: #090711;
       --rf6-panel: #171020;
@@ -244,7 +244,7 @@
       .rfui-ready .enter input[name="code"] { width: 100% !important; }
       .rfui-ready .task_text table { display: block !important; max-width: 100% !important; overflow-x: auto !important; }
     }
-  \`;
+  `;
 
   function installStyles() {
     var style = document.getElementById('rfui-styles');
