@@ -495,6 +495,8 @@
         map.classList.add('rf-ready');
       };
       img.onerror = function() {
+        // Restore the original list if the map image cannot be loaded.
+        rows.forEach(function(r){ r.style.display = ''; });
         if (map.parentNode) map.parentNode.removeChild(map);
         var st = document.getElementById(STYLE_ID);
         if (st && st.parentNode) st.parentNode.removeChild(st);
@@ -502,6 +504,8 @@
       img.src = IMAGE_URL;
       if (img.complete && img.naturalWidth > 0) img.onload();
     } catch (err) {
+      // Keep the original task list usable if map initialization fails.
+      rows.forEach(function(r){ r.style.display = ''; });
       if (map.parentNode) map.parentNode.removeChild(map);
       var styleEl = document.getElementById(STYLE_ID);
       if (styleEl && styleEl.parentNode) styleEl.parentNode.removeChild(styleEl);
