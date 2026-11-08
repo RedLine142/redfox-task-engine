@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.0.0';
+  var VERSION = '1.0.1';
   var COLUMNS = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К'];
   var PREFIX = 'rf-sea-battle';
   var processed = Object.create(null);
@@ -17,7 +17,7 @@
       '.rf-sea-wrap{width:100%;max-width:620px;margin:22px auto;padding:16px;background:#101014;border:1px solid rgba(220,35,55,.45);border-radius:12px;color:#f5eeee;box-sizing:border-box;font-family:Arial,sans-serif}' +
       '.rf-sea-title{margin:0 0 6px;text-align:center;font-size:22px;font-weight:800;letter-spacing:2px;color:#f4eeee}' +
       '.rf-sea-subtitle{margin:0 0 14px;text-align:center;color:#b8a5a5;font-size:12px;letter-spacing:1px}' +
-      '.rf-sea-grid{display:grid;grid-template-columns:30px repeat(10,minmax(0,1fr));gap:4px;width:100%}' +
+      '.rf-sea-grid{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:4px;width:100%}' +
       '.rf-sea-head,.rf-sea-cell{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;min-width:0;border:1px solid #51434a;border-radius:5px;box-sizing:border-box}' +
       '.rf-sea-head{background:#2a2025;color:#f5dfe4;font-size:clamp(10px,2.5vw,14px);font-weight:800}' +
       '.rf-sea-corner{background:transparent;border-color:transparent}' +
@@ -28,7 +28,7 @@
       '.rf-sea-legend span{display:inline-flex;align-items:center;gap:6px}' +
       '.rf-sea-dot{width:10px;height:10px;border-radius:3px;display:inline-block}' +
       '.rf-sea-dot-hit{background:#0b9b55}.rf-sea-dot-miss{background:#c21b32}' +
-      '@media(max-width:420px){.rf-sea-wrap{padding:10px}.rf-sea-grid{gap:3px;grid-template-columns:24px repeat(10,minmax(0,1fr))}.rf-sea-head,.rf-sea-cell{border-radius:3px}.rf-sea-title{font-size:18px}}';
+      '@media(max-width:420px){.rf-sea-wrap{padding:10px}.rf-sea-grid{gap:3px;grid-template-columns:repeat(11,minmax(0,1fr))}.rf-sea-head,.rf-sea-cell{border-radius:3px}.rf-sea-title{font-size:18px}}';
     (document.head || document.documentElement).appendChild(style);
   }
 
