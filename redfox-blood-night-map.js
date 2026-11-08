@@ -68,11 +68,6 @@
         background:linear-gradient(135deg,rgba(83,9,25,.18),transparent 38%),var(--rf-blood-panel);
         box-shadow:0 18px 60px rgba(0,0,0,.58),0 0 34px rgba(143,8,32,.12);
       }
-      body.rf-blood-night .container::before {
-        content:"FRIDAY THE 13TH  /  SURVIVAL NIGHT"; display:block; margin:0 0 15px;
-        color:#f04458; font-size:11px; font-weight:900; letter-spacing:.32em;
-        text-align:center; text-shadow:0 0 12px rgba(240,43,67,.55);
-      }
       body.rf-blood-night .team_name {
         margin:0 0 10px !important; color:#d7b9bf !important; font-size:12px !important;
         font-weight:800; letter-spacing:.2em; text-transform:uppercase;
