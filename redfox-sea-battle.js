@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.0.2';
+  var VERSION = '1.0.3';
   var COLUMNS = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К'];
   var PREFIX = 'rf-sea-battle';
   var processed = Object.create(null);
@@ -86,20 +86,20 @@
     var type = '';
     var letter = '';
     var row = '';
-    var match = value.match(/sea-(hit|miss)-([АБВГДЕЖЗИК])(10|[1-9])/i);
+    var match = value.match(/^([АБВГДЕЖЗИКабвгдежзик])(10|[1-9])$/);
 
     if (match) {
-      type = match[1].toLowerCase();
-      letter = match[2].toUpperCase();
-      row = match[3];
+      letter = match[1].toUpperCase();
+      row = match[2];
+      type = match[1] === letter ? 'hit' : 'miss';
     } else {
-      match = value.match(/([АБВГДЕЖЗИКабвгдежзик])(10|[1-9])/);
+      match = value.match(/^sea-(hit|miss)-([АБВГДЕЖЗИК])(10|[1-9])$/i);
       if (match) {
-        letter = match[1].toUpperCase();
-        row = match[2];
-        type = match[1] === letter ? 'hit' : 'miss';
+        type = match[1].toLowerCase();
+        letter = match[2].toUpperCase();
+        row = match[3];
       } else {
-        match = value.match(/([hm])([АБВГДЕЖЗИК])(10|[1-9])/i);
+        match = value.match(/^([hm])([АБВГДЕЖЗИК])(10|[1-9])$/i);
         if (!match) return false;
         type = match[1].toLowerCase() === 'h' ? 'hit' : 'miss';
         letter = match[2].toUpperCase();
@@ -120,23 +120,21 @@
     processed[key] = true;
     return true;
   }
-
   function scanComments() {
-    var selectors = [
-      '.found_codes .rf-found-comment',
-      '.found_codes .code',
-      '.found-codes .rf-found-comment',
-      '.found-codes .code',
-      '.task_text .code'
-    ];
-    var nodes = document.querySelectorAll(selectors.join(','));
-    Array.prototype.forEach.call(nodes, function (node) {
-      var marker = node.querySelector && node.querySelector('.sTask');
-      if (marker) applyKey(marker.textContent);
-      applyKey(node.textContent);
+    var comments = document.querySelectorAll(
+      '.found_codes .rf-found-comment, .found-codes .rf-found-comment'
+    );
+    Array.prototype.forEach.call(comments, function (comment) {
+      applyKey(comment.textContent);
+    });
+
+    var markers = document.querySelectorAll(
+      '.found_codes .code .sTask, .found-codes .code .sTask'
+    );
+    Array.prototype.forEach.call(markers, function (marker) {
+      applyKey(marker.textContent);
     });
   }
-
   function startObserver() {
     if (observer || !window.MutationObserver || !document.documentElement) return;
     observer = new MutationObserver(function () {
