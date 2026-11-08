@@ -255,6 +255,18 @@
     document.documentElement.classList.add(ROOT_CLASS);
     document.body.classList.add(ROOT_CLASS);
     addParticles();
+    // Load the optional horror map only on the player Safari cabinet.
+    // Keeping this loader here avoids a second long script tag in the game title field.
+    if (!document.getElementById('rf-horror-map-loader')) {
+      var mapScript = document.createElement('script');
+      mapScript.id = 'rf-horror-map-loader';
+      mapScript.src = 'https://cdn.jsdelivr.net/gh/RedLine142/redfox-task-engine@e22d5d722247c158512f8c849fb5888b8a9249f3/redfox-horror-map.js?v=1.1.0';
+      mapScript.async = true;
+      mapScript.onerror = function () {
+        if (window.console && console.error) console.error('[RED FOX] Horror map script could not be loaded; original task list remains available.');
+      };
+      (document.head || document.documentElement).appendChild(mapScript);
+    }
     var title = document.querySelector('.container h1');
     if (title) title.setAttribute('data-rf-theme', 'blood-night');
     if (window.console && console.info) console.info('[RED FOX] Blood Night page theme ready');
