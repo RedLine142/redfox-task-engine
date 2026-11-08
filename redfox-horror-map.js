@@ -83,9 +83,9 @@
   function readProgress(row) {
     if (!row) return { found: null, total: null, percent: 0, label: 'Статистика пока недоступна' };
     var text = (row.innerText || row.textContent || '').replace(/\s+/g, ' ').trim();
-    var match = text.match(/(?:найдено\s*)?(\d+)\s*(?:из|\/)\s*(\d+)/i) || text.match(/(\d+)\s*\/\s*(\d+)/);
+    var match = text.match(/(?:найдено\s*)?(\d+)\s*(?:из|\/)\s*(\d+)(?:\s*\+\s*(\d+))?/i) || text.match(/(\d+)\s*\/\s*(\d+)/);
     var found = match ? parseInt(match[1], 10) : null;
-    var total = match ? parseInt(match[2], 10) : null;
+    var total = match ? parseInt(match[2], 10) + (parseInt(match[3], 10) || 0) : null;
     var bar = row.querySelector('.progress-bar,[role="progressbar"],.progress > div');
     var percent = 0;
     if (bar) {
