@@ -6,8 +6,10 @@
 (function (window, document) {
   'use strict';
 
-  var PATH_OK = /^\/play\/safari\/?$/i.test((window.location && window.location.pathname) || '');
-  if (!PATH_OK) return;
+  // Fail closed: this file may be embedded in the game title and therefore loaded elsewhere.
+  // Do absolutely nothing unless this is the exact player task-list route.
+  var currentPath = window.location && window.location.pathname ? window.location.pathname : '';
+  if (!/^\/play\/safari\/?$/i.test(currentPath)) return;
 
   var STYLE_ID = 'rf-horror-map-style';
   var ROOT_ID = 'rf-horror-map';
@@ -30,7 +32,6 @@
   function addStyles() {
     if (document.getElementById(STYLE_ID)) return;
     var css = `
-      body.rf-horror-map-page .container { overflow:visible !important; }
       #${ROOT_ID} { position:relative; width:100%; max-width:900px; margin:10px auto 22px; color:#fff; }
       #${ROOT_ID} .rf-map-heading { margin:0 0 12px; text-align:center; color:#f5dfe3; font-size:12px; font-weight:900; letter-spacing:.22em; text-transform:uppercase; }
       #${ROOT_ID} .rf-map-frame { position:relative; width:100%; aspect-ratio:3 / 4; overflow:visible; isolation:isolate; border:1px solid rgba(240,43,67,.55); background:#090608; box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 28px rgba(181,18,43,.18); }
@@ -49,7 +50,6 @@
       #${ROOT_ID} .rf-tip-progress > span { display:block; width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,#780b22,#e21d3d 75%,#ff5364); box-shadow:0 0 10px rgba(240,43,67,.5); transition:width .25s ease; }
       #${ROOT_ID} .rf-tip-hint { margin-top:8px; color:#a98d94; font-size:10px; }
       #${ROOT_ID} .rf-map-legend { margin-top:10px; text-align:center; color:#9e858b; font-size:10px; letter-spacing:.08em; }
-      body.rf-horror-map-page .item { display:none !important; }
       @media (max-width:600px) {
         #${ROOT_ID} { margin-top:6px; }
         #${ROOT_ID} .rf-map-tooltip { width:min(260px,calc(100vw - 24px)); padding:12px; }
@@ -71,9 +71,9 @@
     catch (e) { return String(url || '').split('?')[0].replace(/\/$/, ''); }
   }
 
-  function findOriginalRow(task) {
+  function findOriginalRow(task, container) {
     var target = normalizeUrl(task.url);
-    var links = document.querySelectorAll('.item a[href], a[href*="/play/safari/"]');
+    var links = container.querySelectorAll('.item a[href], a[href*="/play/safari/"]');
     for (var i = 0; i < links.length; i++) {
       if (normalizeUrl(links[i].href) === target) return links[i].closest('.item') || links[i];
     }
@@ -108,10 +108,19 @@
 
   function init() {
     if (!document.body || document.getElementById(ROOT_ID)) return;
+    // Positive page fingerprint: require the real task list, not merely a matching URL.
     var container = document.querySelector('.container');
-    if (!container) return;
+    if (!container || !container.querySelector('h1')) return;
+    var matchedRows = [];
+    for (var i = 0; i < TASKS.length; i++) {
+      var row = findOriginalRow(TASKS[i], container);
+      if (row) matchedRows.push(row);
+    }
+    if (matchedRows.length < 3) return;
     addStyles();
-    document.body.classList.add('rf-horror-map-page');
+    matchedRows.forEach(function (row) {
+      if (row.classList && row.classList.contains('item')) row.style.display = 'none';
+    });
 
     var map = document.createElement('section');
     map.id = ROOT_ID;
@@ -132,7 +141,7 @@
 
     function hideTooltip() { tooltip.classList.remove('rf-visible'); }
     function showTooltip(task, hotspot, point) {
-      var progress = readProgress(findOriginalRow(task));
+      var progress = readProgress(findOriginalRow(task, container));
       tooltip.innerHTML = '<div class="rf-tip-kicker">Задание сезона</div>' +
         '<div class="rf-tip-title"></div>' +
         '<div class="rf-tip-stats"><span>Прогресс кодов</span><span class="rf-tip-count"></span></div>' +
