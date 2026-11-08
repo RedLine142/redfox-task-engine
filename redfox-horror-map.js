@@ -1,4 +1,4 @@
-/* RED FOX — HORROR SEASON MAP v1.1.0
+/* RED FOX — HORROR SEASON MAP v1.2.0
    Fail-safe visual replacement. The original task list is hidden only after
    the map image has loaded and the map has been inserted successfully.
 */
@@ -16,16 +16,16 @@
   var IMAGE_WIDTH = 1086;
   var IMAGE_HEIGHT = 1448;
   var TASKS = [
-    { name:'Билборд с кроссвордом', url:'/play/safari/8984', x:350, y:980, w:350, h:400 },
-    { name:'Семья Симпсонов', url:'/play/safari/8985', x:50, y:920, w:250, h:300 },
-    { name:'Садовник', url:'/play/safari/8986', x:800, y:270, w:280, h:215 },
-    { name:'13', url:'/play/safari/8987', x:890, y:950, w:135, h:160 },
-    { name:'Хоррор', url:'/play/safari/8988', x:575, y:100, w:185, h:85 },
-    { name:'Кинг', url:'/play/safari/8989', x:350, y:390, w:340, h:310 },
-    { name:'Пила', url:'/play/safari/8990', x:780, y:455, w:306, h:305 },
-    { name:'Кошмар на улице Вязов', url:'/play/safari/8991', x:0, y:405, w:375, h:340 },
-    { name:'Фобия', url:'/play/safari/8992', x:397, y:176, w:363, h:214 },
-    { name:'Байки из склепа', url:'/play/safari/8993', x:34, y:120, w:297, h:281 }
+    { name:'Билборд с кроссвордом', url:'/play/safari/8984', x:370, y:1010, w:295, h:230 },
+    { name:'Семья Симпсонов', url:'/play/safari/8985', x:60, y:945, w:240, h:245 },
+    { name:'Садовник', url:'/play/safari/8986', x:870, y:360, w:130, h:90 },
+    { name:'13', url:'/play/safari/8987', x:915, y:1000, w:135, h:120 },
+    { name:'Хоррор', url:'/play/safari/8988', x:600, y:117, w:150, h:53 },
+    { name:'Кинг', url:'/play/safari/8989', x:540, y:430, w:80, h:170 },
+    { name:'Пила', url:'/play/safari/8990', x:820, y:600, w:130, h:80 },
+    { name:'Кошмар на улице Вязов', url:'/play/safari/8991', x:230, y:600, w:135, h:90 },
+    { name:'Фобия', url:'/play/safari/8992', x:513, y:294, w:127, h:46 },
+    { name:'Байки из склепа', url:'/play/safari/8993', x:117, y:295, w:158, h:70 }
   ];
 
   function normalized(pathname) {
@@ -81,7 +81,7 @@
       '#' + ROOT_ID + ' .rf-map-image{display:block;width:100%;height:100%;object-fit:fill;user-select:none;-webkit-user-drag:none}',
       '#' + ROOT_ID + ' .rf-hotspot{position:absolute;z-index:2;display:block;padding:0;margin:0;border:1px solid transparent;border-radius:5px;background:rgba(240,43,67,0);cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}',
       '#' + ROOT_ID + ' .rf-hotspot:hover,' + '#' + ROOT_ID + ' .rf-hotspot:focus-visible,' + '#' + ROOT_ID + ' .rf-hotspot.rf-touch-open{z-index:5;transform:scale(1.035);border-color:rgba(255,92,112,.95);background:rgba(240,43,67,.13);box-shadow:0 0 0 2px rgba(240,43,67,.2),0 0 22px rgba(240,43,67,.5);outline:none}',
-      '#' + ROOT_ID + ' .rf-tooltip{position:absolute;z-index:10;left:50%;top:10px;transform:translateX(-50%);display:none;width:min(300px,calc(100% - 20px));box-sizing:border-box;padding:13px 15px;border:1px solid rgba(240,43,67,.75);border-radius:5px;color:#f8e9ec;background:rgba(15,7,11,.97);box-shadow:0 12px 36px rgba(0,0,0,.65);pointer-events:none}',
+      '#' + ROOT_ID + ' .rf-tooltip{position:absolute;z-index:10;left:0;top:0;transform:none;display:none;width:min(300px,calc(100% - 16px));box-sizing:border-box;padding:13px 15px;border:1px solid rgba(240,43,67,.75);border-radius:5px;color:#f8e9ec;background:rgba(15,7,11,.97);box-shadow:0 12px 36px rgba(0,0,0,.65);pointer-events:none}',
       '#' + ROOT_ID + ' .rf-tooltip.rf-visible{display:block}',
       '#' + ROOT_ID + ' .rf-tip-title{font-size:15px;font-weight:900;margin-bottom:8px}',
       '#' + ROOT_ID + ' .rf-tip-count{font-size:11px;color:#d7b9bf;margin-bottom:7px}',
@@ -140,8 +140,8 @@
     tooltip.appendChild(tipCount);
     tooltip.appendChild(tipBar);
 
+    frame.appendChild(tooltip);
     map.appendChild(frame);
-    map.appendChild(tooltip);
     var legend = document.createElement('div');
     legend.className = 'rf-map-legend';
     legend.textContent = 'Наведите на объект, чтобы увидеть прогресс · Нажмите, чтобы открыть задание';
@@ -172,6 +172,23 @@
           tipCount.textContent = p.label;
           tipFill.style.width = p.percent + '%';
           tooltip.classList.add('rf-visible');
+
+          // Position the progress card beside the active hotspot, inside the map.
+          var mapWidth = frame.clientWidth;
+          var mapHeight = frame.clientHeight;
+          var cardWidth = Math.min(300, Math.max(180, mapWidth - 16));
+          var cardHeight = tooltip.offsetHeight || 78;
+          var centerX = (task.x + task.w / 2) / IMAGE_WIDTH * mapWidth;
+          var hotspotTop = task.y / IMAGE_HEIGHT * mapHeight;
+          var hotspotBottom = (task.y + task.h) / IMAGE_HEIGHT * mapHeight;
+          var left = Math.max(8, Math.min(mapWidth - cardWidth - 8, centerX - cardWidth / 2));
+          var top = hotspotBottom + 10;
+          if (top + cardHeight > mapHeight - 8) {
+            top = hotspotTop - cardHeight - 10;
+          }
+          top = Math.max(8, Math.min(mapHeight - cardHeight - 8, top));
+          tooltip.style.left = left + 'px';
+          tooltip.style.top = top + 'px';
         }
         a.addEventListener('mouseenter', show);
         a.addEventListener('focus', show);
