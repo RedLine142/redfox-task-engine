@@ -1,4 +1,4 @@
-/* RED FOX — BLOOD NIGHT + HORROR MAP v1.1.0
+/* RED FOX — BLOOD NIGHT + HORROR MAP v1.3.0
    Single-file build: original Blood Night theme followed by the interactive season map.
    Both modules are restricted to /play/safari and leave admin pages untouched.
 */
@@ -274,7 +274,7 @@
 
 /* ===== HORROR SEASON MAP MODULE ===== */
 
-/* RED FOX — HORROR SEASON MAP v1.2.0
+/* RED FOX — HORROR SEASON MAP v1.3.0
    Fail-safe visual replacement. The original task list is hidden only after
    the map image has loaded and the map has been inserted successfully.
 */
@@ -355,17 +355,18 @@
       '#' + ROOT_ID + '.rf-ready{display:block}',
       '#' + ROOT_ID + ' .rf-map-frame{position:relative;width:100%;aspect-ratio:3/4;overflow:visible;isolation:isolate;border:1px solid rgba(240,43,67,.55);background:#090608;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 28px rgba(181,18,43,.18)}',
       '#' + ROOT_ID + ' .rf-map-image{display:block;width:100%;height:100%;object-fit:fill;user-select:none;-webkit-user-drag:none}',
-      '#' + ROOT_ID + ' .rf-hotspot{position:absolute;z-index:2;display:block;padding:0;margin:0;border:1px solid transparent;border-radius:5px;background:rgba(240,43,67,0);cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}',
-      '#' + ROOT_ID + ' .rf-hotspot:hover,' + '#' + ROOT_ID + ' .rf-hotspot:focus-visible,' + '#' + ROOT_ID + ' .rf-hotspot.rf-touch-open{z-index:5;transform:scale(1.035);border-color:rgba(255,92,112,.95);background:rgba(240,43,67,.13);box-shadow:0 0 0 2px rgba(240,43,67,.2),0 0 22px rgba(240,43,67,.5);outline:none}',
+      '#' + ROOT_ID + ' .rf-hotspot{position:absolute;z-index:2;display:block;padding:0;margin:0;border:1px dashed rgba(255,91,112,.58);border-radius:5px;background:rgba(240,43,67,.055);box-shadow:inset 0 0 12px rgba(240,43,67,.10),0 0 7px rgba(240,43,67,.10);cursor:pointer;animation:rf-hotspot-pulse 3.2s ease-in-out infinite;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}',
+      '#' + ROOT_ID + ' .rf-hotspot:hover,' + '#' + ROOT_ID + ' .rf-hotspot:focus-visible,' + '#' + ROOT_ID + ' .rf-hotspot.rf-touch-open{z-index:5;transform:scale(1.035);border:1px solid rgba(255,112,130,1);background:rgba(240,43,67,.19);box-shadow:inset 0 0 18px rgba(240,43,67,.24),0 0 0 2px rgba(240,43,67,.24),0 0 25px rgba(240,43,67,.68);animation:none;outline:none}',
       '#' + ROOT_ID + ' .rf-tooltip{position:absolute;z-index:10;left:0;top:0;transform:none;display:none;width:min(300px,calc(100% - 16px));box-sizing:border-box;padding:13px 15px;border:1px solid rgba(240,43,67,.75);border-radius:5px;color:#f8e9ec;background:rgba(15,7,11,.97);box-shadow:0 12px 36px rgba(0,0,0,.65);pointer-events:none}',
       '#' + ROOT_ID + ' .rf-tooltip.rf-visible{display:block}',
       '#' + ROOT_ID + ' .rf-tip-title{font-size:15px;font-weight:900;margin-bottom:8px}',
       '#' + ROOT_ID + ' .rf-tip-count{font-size:11px;color:#d7b9bf;margin-bottom:7px}',
       '#' + ROOT_ID + ' .rf-tip-bar{height:6px;border-radius:20px;overflow:hidden;background:#29151b}',
       '#' + ROOT_ID + ' .rf-tip-bar span{display:block;height:100%;background:linear-gradient(90deg,#780b22,#e21d3d 75%,#ff5364)}',
+      '@keyframes rf-hotspot-pulse{0%,100%{border-color:rgba(255,91,112,.42);box-shadow:inset 0 0 8px rgba(240,43,67,.07),0 0 4px rgba(240,43,67,.06)}50%{border-color:rgba(255,91,112,.82);box-shadow:inset 0 0 15px rgba(240,43,67,.15),0 0 12px rgba(240,43,67,.2)}}',
       '#' + ROOT_ID + ' .rf-map-legend{margin-top:9px;text-align:center;color:#a98d94;font-size:10px}',
       '@media(max-width:600px){#' + ROOT_ID + '{margin-top:6px}#' + ROOT_ID + ' .rf-map-legend{font-size:9px}}',
-      '@media(prefers-reduced-motion:reduce){#' + ROOT_ID + ' .rf-hotspot{transition:none}}'
+      '@media(prefers-reduced-motion:reduce){#' + ROOT_ID + ' .rf-hotspot{transition:none;animation:none}}'
     ].join('\n');
     var style = document.createElement('style');
     style.id = STYLE_ID;
