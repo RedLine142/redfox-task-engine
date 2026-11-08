@@ -1,4 +1,4 @@
-/* RED FOX — BLOOD NIGHT + HORROR MAP
+/* RED FOX — BLOOD NIGHT + HORROR MAP v1.1.0
    Single-file build: original Blood Night theme followed by the interactive season map.
    Both modules are restricted to /play/safari and leave admin pages untouched.
 */
@@ -481,10 +481,18 @@
         frame.appendChild(a);
       });
 
+      // Show the map shell and hide the old task cards immediately.
+      // Do not wait for the background image request to finish: that caused
+      // the original list to flash briefly during page load.
+      rows.forEach(function(r){ r.style.display = 'none'; });
+      map.classList.add('rf-ready');
+      img.loading = 'eager';
+      if ('fetchPriority' in img) img.fetchPriority = 'high';
+      img.decoding = 'async';
+
       img.onload = function() {
         if (!map.parentNode || !document.body.contains(map)) return;
         map.classList.add('rf-ready');
-        rows.forEach(function(r){ r.style.display = 'none'; });
       };
       img.onerror = function() {
         if (map.parentNode) map.parentNode.removeChild(map);
