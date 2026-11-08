@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  var VERSION = '1.0.1';
+  var VERSION = '1.0.2';
   var COLUMNS = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'К'];
   var PREFIX = 'rf-sea-battle';
   var processed = Object.create(null);
@@ -83,12 +83,30 @@
 
   function applyKey(raw) {
     var value = String(raw || '').trim();
+    var type = '';
+    var letter = '';
+    var row = '';
     var match = value.match(/sea-(hit|miss)-([АБВГДЕЖЗИК])(10|[1-9])/i);
-    if (!match) return false;
 
-    var type = match[1].toLowerCase();
-    var letter = match[2].toUpperCase();
-    var row = match[3];
+    if (match) {
+      type = match[1].toLowerCase();
+      letter = match[2].toUpperCase();
+      row = match[3];
+    } else {
+      match = value.match(/([АБВГДЕЖЗИКабвгдежзик])(10|[1-9])/);
+      if (match) {
+        letter = match[1].toUpperCase();
+        row = match[2];
+        type = match[1] === letter ? 'hit' : 'miss';
+      } else {
+        match = value.match(/([hm])([АБВГДЕЖЗИК])(10|[1-9])/i);
+        if (!match) return false;
+        type = match[1].toLowerCase() === 'h' ? 'hit' : 'miss';
+        letter = match[2].toUpperCase();
+        row = match[3];
+      }
+    }
+
     var key = type + '-' + letter + row;
     if (processed[key]) return true;
 
