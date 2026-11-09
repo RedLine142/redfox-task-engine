@@ -1,4 +1,4 @@
-/* RED FOX — BLOOD NIGHT + HORROR MAP v1.8.0
+/* RED FOX — BLOOD NIGHT + HORROR MAP v1.6.0
    Single-file build: original Blood Night theme followed by the interactive season map.
    Both modules are restricted to /play/safari and leave admin pages untouched.
 */
@@ -84,18 +84,6 @@
         background:linear-gradient(90deg,var(--rf-blood-bright),transparent);
         box-shadow:0 0 12px rgba(240,43,67,.55);
       }
-      body.rf-blood-night .rf-season-heading-row {display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;margin:0 0 27px}
-      body.rf-blood-night .rf-season-heading-row h1 {flex:1 1 auto;min-width:0;margin:0 !important;padding-bottom:19px !important}
-      body.rf-blood-night .rf-season-orb {--rf-orb-level:0%;position:relative;flex:0 0 92px;width:92px;height:92px;margin:-3px 5px 15px 0;border-radius:50%;padding:7px;box-sizing:border-box;cursor:help;background:conic-gradient(from 215deg,#49301b 0deg,#d7bd83 38deg,#fff0bd 66deg,#73522d 102deg,#261b16 142deg,#d4b77a 190deg,#fff0c0 228deg,#63472a 270deg,#2c2018 315deg,#49301b 360deg);border:1px solid #f1d9a2;box-shadow:0 0 0 2px #120c0d,0 0 0 4px rgba(190,148,83,.72),inset 0 0 5px #fff0c5,0 7px 22px rgba(0,0,0,.8),0 0 25px rgba(210,14,43,.3);isolation:isolate}
-      body.rf-blood-night .rf-season-orb::before {content:"";position:absolute;inset:5px;z-index:4;border-radius:50%;pointer-events:none;border:1px solid rgba(255,235,190,.78);background:radial-gradient(ellipse at 31% 16%,rgba(255,255,255,.72),transparent 19%),radial-gradient(ellipse at 72% 82%,rgba(255,30,58,.18),transparent 42%),linear-gradient(145deg,rgba(255,255,255,.2),transparent 34%,rgba(0,0,0,.42));box-shadow:inset 0 2px 9px rgba(255,255,255,.34),inset 0 -7px 13px rgba(0,0,0,.7)}
-      body.rf-blood-night .rf-season-orb-glass {position:absolute;inset:9px;z-index:1;overflow:hidden;border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#3a0a16 0%,#17050b 55%,#050305 100%);box-shadow:inset 0 0 14px #000,0 0 5px rgba(0,0,0,.95)}
-      body.rf-blood-night .rf-season-orb-liquid {position:absolute;left:-2%;right:-2%;bottom:0;height:var(--rf-orb-level);overflow:hidden;border-radius:0 0 50% 50%;background:radial-gradient(ellipse at 35% 18%,rgba(255,110,132,.72),transparent 34%),linear-gradient(90deg,#4e0312 0%,#97091f 20%,#e21a39 48%,#b30b2a 72%,#510414 100%);box-shadow:inset 0 5px 9px rgba(255,150,165,.38),inset 0 -5px 9px rgba(30,0,5,.55),0 0 18px rgba(225,14,48,.72);transition:height 1s cubic-bezier(.2,.75,.25,1)}
-      body.rf-blood-night .rf-season-orb-liquid::before {content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,220,224,.9) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(255,85,112,.9) 0 1.5px,transparent 2.2px);background-size:19px 21px,27px 25px;background-position:2px 4px,10px 12px;opacity:.66;animation:rf-season-orb-bubbles 4s linear infinite}
-      body.rf-blood-night .rf-season-orb-liquid::after {content:"";position:absolute;left:-10%;top:-4px;width:120%;height:9px;border-radius:50%;background:linear-gradient(180deg,rgba(255,210,216,.78),rgba(255,65,93,.36));box-shadow:0 0 10px rgba(255,52,86,.95)}
-      body.rf-blood-night .rf-season-orb-value {position:absolute;z-index:5;inset:0;display:flex;align-items:center;justify-content:center;color:#fff0e8;font:900 17px/1 Arial,sans-serif;letter-spacing:-.04em;text-shadow:0 2px 3px #250008,0 0 9px rgba(255,30,62,.8);pointer-events:none}
-      body.rf-blood-night .rf-season-orb-caption {position:absolute;z-index:5;left:50%;bottom:-19px;transform:translateX(-50%);color:#f0d9a8;font:900 8px Arial,sans-serif;letter-spacing:.16em;white-space:nowrap;text-shadow:0 1px 5px #000}
-      @keyframes rf-season-orb-bubbles {from{background-position:2px 4px,10px 12px}to{background-position:2px -17px,10px -13px}}
-      @media(max-width:600px){body.rf-blood-night .rf-season-heading-row{gap:10px;margin-bottom:22px}body.rf-blood-night .rf-season-orb{flex-basis:66px;width:66px;height:66px;padding:5px;margin:0 2px 10px 0}body.rf-blood-night .rf-season-orb-glass{inset:7px}body.rf-blood-night .rf-season-orb::before{inset:4px}body.rf-blood-night .rf-season-orb-value{font-size:13px}body.rf-blood-night .rf-season-orb-caption{bottom:-16px;font-size:7px}}
       body.rf-blood-night .item {
         position:relative; box-sizing:border-box; margin:13px 0 !important; padding:0 !important;
         overflow:hidden; border:1px solid rgba(190,30,54,.28); border-radius:4px;
@@ -462,7 +450,7 @@
         return { label:'Найдено ' + found + ' из ' + total, percent:Math.max(0,Math.min(100,pct)), found:found, total:total };
       }
     }
-    return { label:pct > 0 ? 'Выполнено ' + Math.round(pct) + '%' : 'Прогресс недоступен', percent:Math.max(0,Math.min(100,pct)) };
+    return { label:pct > 0 ? 'Выполнено ' + Math.round(pct) + '%' : 'Прогресс недоступен', percent:Math.max(0,Math.min(100,pct)), found:0, total:0 };
   }
 
   function addStyle() {
@@ -545,51 +533,50 @@
 
     try {
       addStyle();
-      var headingRow = document.createElement('div');
-      headingRow.className = 'rf-season-heading-row';
-      var orb = document.createElement('div');
-      orb.className = 'rf-season-orb';
-      orb.setAttribute('role', 'img');
-      orb.setAttribute('aria-label', 'Общий прогресс сезона: 0 процентов');
-      var orbGlass = document.createElement('div');
-      orbGlass.className = 'rf-season-orb-glass';
-      var orbLiquid = document.createElement('div');
-      orbLiquid.className = 'rf-season-orb-liquid';
-      orbGlass.appendChild(orbLiquid);
-      orb.appendChild(orbGlass);
-      var orbValue = document.createElement('span');
-      orbValue.className = 'rf-season-orb-value';
-      orbValue.textContent = '0%';
-      orb.appendChild(orbValue);
-      var orbCaption = document.createElement('span');
-      orbCaption.className = 'rf-season-orb-caption';
-      orbCaption.textContent = 'ПРОГРЕСС';
-      orb.appendChild(orbCaption);
-      headingParent.insertBefore(headingRow, heading);
-      headingRow.appendChild(heading);
-      headingRow.appendChild(orb);
-
-      function updateSeasonOrb() {
-        var foundTotal = 0;
-        var availableTotal = 0;
+      var headingParent = heading.parentNode;
+      var progressStyleId = 'rf-season-total-progress-style';
+      if (!document.getElementById(progressStyleId)) {
+        var progressStyle = document.createElement('style');
+        progressStyle.id = progressStyleId;
+        progressStyle.textContent = `
+          #rf-season-total-progress{box-sizing:border-box;width:100%;margin:0 0 19px;padding:13px 17px 15px;border:1px solid rgba(211,34,58,.38);border-radius:5px;background:linear-gradient(110deg,rgba(70,10,25,.72),rgba(18,10,15,.96) 72%);box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 8px 24px rgba(0,0,0,.3)}
+          #rf-season-total-progress .rf-total-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;color:#e9cbd0;font:800 10px Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase}
+          #rf-season-total-progress .rf-total-count{color:#fff1f2;font-size:12px;letter-spacing:.04em;white-space:nowrap}
+          #rf-season-total-progress .rf-total-tube{position:relative;height:23px;padding:3px;box-sizing:border-box;overflow:hidden;border:1px solid rgba(244,220,226,.62);border-radius:999px;background:linear-gradient(180deg,#080609,#251018 52%,#090609);box-shadow:inset 0 3px 6px rgba(0,0,0,.95),0 0 0 1px rgba(0,0,0,.6),0 0 12px rgba(210,20,48,.12)}
+          #rf-season-total-progress .rf-total-fill{position:relative;width:0;height:100%;overflow:hidden;border-radius:999px;background:linear-gradient(180deg,#ff9aa8 0%,#f12b4c 22%,#c80d31 58%,#79051d 100%);box-shadow:inset 0 2px 4px rgba(255,255,255,.42),inset 0 -3px 5px rgba(35,0,8,.55),0 0 15px rgba(239,25,62,.7);transition:width 1s cubic-bezier(.2,.75,.25,1)}
+          #rf-season-total-progress .rf-total-fill::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 18px,rgba(255,255,255,.11) 19px 21px,transparent 22px 37px);opacity:.48;animation:rf-total-flow 4s linear infinite}
+          #rf-season-total-progress .rf-total-fill::after{content:"";position:absolute;left:0;right:0;top:0;height:45%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.48),rgba(255,255,255,.05))}
+          #rf-season-total-progress .rf-total-glass-shine{position:absolute;z-index:2;inset:1px 4px;border-radius:999px;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.19),transparent 43%,rgba(255,255,255,.035) 75%,rgba(0,0,0,.2))}
+          #rf-season-total-progress .rf-total-foot{display:flex;justify-content:space-between;gap:10px;margin-top:7px;color:#a98d94;font:700 9px Arial,sans-serif;letter-spacing:.1em}
+          @keyframes rf-total-flow{from{background-position:0 0}to{background-position:74px 0}}
+          @media(max-width:600px){#rf-season-total-progress{padding:11px 12px 12px;margin-bottom:15px}#rf-season-total-progress .rf-total-head{font-size:9px}#rf-season-total-progress .rf-total-tube{height:20px}}
+        `;
+        (document.head || document.documentElement).appendChild(progressStyle);
+      }
+      var totalPanel = document.createElement('section');
+      totalPanel.id = 'rf-season-total-progress';
+      totalPanel.setAttribute('aria-label','Общий прогресс нахождения кодов');
+      totalPanel.innerHTML = '<div class="rf-total-head"><span>Общий прогресс сезона</span><span class="rf-total-count">0 из 0 кодов</span></div><div class="rf-total-tube"><div class="rf-total-fill"></div><span class="rf-total-glass-shine"></span></div><div class="rf-total-foot"><span>НАЙДЕНО КОДОВ</span><span class="rf-total-percent">0%</span></div>';
+      var totalFill = totalPanel.querySelector('.rf-total-fill');
+      var totalCount = totalPanel.querySelector('.rf-total-count');
+      var totalPercent = totalPanel.querySelector('.rf-total-percent');
+      function updateTotalProgress() {
+        var foundSum = 0, totalSum = 0;
         TASKS.forEach(function(task) {
           var p = progressFor(findRow(task, container));
-          foundTotal += p.found || 0;
-          availableTotal += p.total || 0;
+          foundSum += p.found || 0;
+          totalSum += p.total || 0;
         });
-        if (availableTotal <= 0) {
-          orb.title = 'Общий прогресс сезона пока недоступен';
-          return;
-        }
-        var percent = Math.max(0, Math.min(100, foundTotal / availableTotal * 100));
-        orb.style.setProperty('--rf-orb-level', percent + '%');
-        orbValue.textContent = Math.round(percent) + '%';
-        orb.title = 'Найдено ' + foundTotal + ' из ' + availableTotal + ' кодов · ' + Math.round(percent) + '%';
-        orb.setAttribute('aria-label', 'Общий прогресс сезона: найдено ' + foundTotal + ' из ' + availableTotal + ' кодов, ' + Math.round(percent) + ' процентов');
+        var percent = totalSum > 0 ? Math.max(0,Math.min(100,foundSum / totalSum * 100)) : 0;
+        totalFill.style.width = percent + '%';
+        totalCount.textContent = foundSum + ' из ' + totalSum + ' кодов';
+        totalPercent.textContent = Math.round(percent) + '%';
+        totalPanel.title = totalSum ? 'Найдено ' + foundSum + ' из ' + totalSum + ' кодов' : 'Данные о прогрессе пока недоступны';
       }
-      updateSeasonOrb();
-      window.setInterval(updateSeasonOrb, 2500);
-      headingParent.insertBefore(map, headingRow.nextSibling);
+      headingParent.insertBefore(totalPanel, heading.nextSibling);
+      updateTotalProgress();
+      window.setInterval(updateTotalProgress, 2500);
+      headingParent.insertBefore(map, totalPanel.nextSibling);
       if (!map.parentNode) throw new Error('Map insertion failed');
 
       TASKS.forEach(function(task) {
