@@ -84,6 +84,17 @@
         background:linear-gradient(90deg,var(--rf-blood-bright),transparent);
         box-shadow:0 0 12px rgba(240,43,67,.55);
       }
+      body.rf-blood-night .rf-season-heading-row {display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;margin:0 0 27px}
+      body.rf-blood-night .rf-season-heading-row h1 {flex:1 1 auto;min-width:0;margin:0 !important;padding-bottom:19px !important}
+      body.rf-blood-night .rf-season-orb {--rf-orb-level:0%;position:relative;flex:0 0 86px;width:86px;height:86px;margin:-2px 4px 12px 0;border-radius:50%;padding:5px;box-sizing:border-box;cursor:help;background:linear-gradient(135deg,#f2dfb2 0%,#66543c 14%,#17151a 29%,#c6a56b 47%,#292027 65%,#e2c68f 84%,#433323 100%);border:1px solid rgba(244,218,164,.8);box-shadow:0 0 0 2px #171014,0 0 0 3px rgba(210,174,112,.62),0 5px 17px rgba(0,0,0,.75),0 0 22px rgba(194,14,39,.25);isolation:isolate}
+      body.rf-blood-night .rf-season-orb::before {content:"";position:absolute;inset:5px;z-index:4;border-radius:50%;pointer-events:none;border:1px solid rgba(255,231,190,.62);background:radial-gradient(ellipse at 32% 17%,rgba(255,255,255,.62),transparent 23%),radial-gradient(ellipse at 68% 78%,rgba(255,25,56,.18),transparent 46%),linear-gradient(135deg,rgba(255,255,255,.17),transparent 38%,rgba(0,0,0,.3));box-shadow:inset 0 2px 8px rgba(255,255,255,.25),inset 0 -5px 10px rgba(0,0,0,.55)}
+      body.rf-blood-night .rf-season-orb-glass {position:absolute;inset:8px;z-index:1;overflow:hidden;border-radius:50%;background:radial-gradient(circle at 50% 45%,#21070e 0%,#090609 72%);box-shadow:inset 0 0 10px #000,0 0 4px rgba(0,0,0,.9)}
+      body.rf-blood-night .rf-season-orb-liquid {position:absolute;left:0;right:0;bottom:0;height:var(--rf-orb-level);overflow:hidden;border-radius:0 0 50% 50%;background:linear-gradient(90deg,#690719 0%,#b10d2b 28%,#f12646 55%,#a90927 82%,#5b0618 100%);box-shadow:inset 0 4px 8px rgba(255,115,137,.34),0 0 14px rgba(225,14,48,.62);transition:height .8s cubic-bezier(.2,.75,.25,1)}
+      body.rf-blood-night .rf-season-orb-liquid::before {content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,200,208,.85) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(255,76,105,.9) 0 1.4px,transparent 2px);background-size:17px 19px,25px 23px;background-position:2px 4px,10px 12px;opacity:.72;animation:rf-season-orb-bubbles 3.4s linear infinite}
+      body.rf-blood-night .rf-season-orb-liquid::after {content:"";position:absolute;left:-10%;top:-3px;width:120%;height:7px;border-radius:50%;background:rgba(255,115,139,.65);box-shadow:0 0 7px rgba(255,52,86,.85)}
+      body.rf-blood-night .rf-season-orb-caption {position:absolute;z-index:5;left:50%;bottom:-19px;transform:translateX(-50%);color:#e8d5b4;font:800 9px Arial,sans-serif;letter-spacing:.12em;white-space:nowrap;text-shadow:0 1px 4px #000}
+      @keyframes rf-season-orb-bubbles {from{background-position:2px 4px,10px 12px}to{background-position:2px -15px,10px -11px}}
+      @media(max-width:600px){body.rf-blood-night .rf-season-heading-row{gap:10px;margin-bottom:22px}body.rf-blood-night .rf-season-orb{flex-basis:62px;width:62px;height:62px;padding:4px;margin:0 2px 10px 0}body.rf-blood-night .rf-season-orb-glass{inset:6px}body.rf-blood-night .rf-season-orb::before{inset:4px}body.rf-blood-night .rf-season-orb-caption{bottom:-16px;font-size:8px}}
       body.rf-blood-night .item {
         position:relative; box-sizing:border-box; margin:13px 0 !important; padding:0 !important;
         overflow:hidden; border:1px solid rgba(190,30,54,.28); border-radius:4px;
@@ -428,7 +439,7 @@
   }
 
   function progressFor(row) {
-    if (!row) return { label:'Прогресс недоступен', percent:0 };
+    if (!row) return { label:'Прогресс недоступен', percent:0, found:0, total:0 };
     var txt = (row.innerText || row.textContent || '').replace(/\s+/g, ' ');
     var m = txt.match(/(?:найдено\s*)?(\d+)\s*(?:из|\/)\s*(\d+)(?:\s*\+\s*(\d+))?/i);
     var pct = 0;
@@ -447,7 +458,7 @@
       var total = parseInt(m[2],10) + (parseInt(m[3],10) || 0);
       if (total > 0) {
         pct = Math.max(pct, found / total * 100);
-        return { label:'Найдено ' + found + ' из ' + total, percent:Math.max(0,Math.min(100,pct)) };
+        return { label:'Найдено ' + found + ' из ' + total, percent:Math.max(0,Math.min(100,pct)), found:found, total:total };
       }
     }
     return { label:pct > 0 ? 'Выполнено ' + Math.round(pct) + '%' : 'Прогресс недоступен', percent:Math.max(0,Math.min(100,pct)) };
@@ -533,7 +544,46 @@
 
     try {
       addStyle();
-      heading.parentNode.insertBefore(map, heading.nextSibling);
+      var headingRow = document.createElement('div');
+      headingRow.className = 'rf-season-heading-row';
+      var orb = document.createElement('div');
+      orb.className = 'rf-season-orb';
+      orb.setAttribute('role', 'img');
+      orb.setAttribute('aria-label', 'Общий прогресс сезона: 0 процентов');
+      var orbGlass = document.createElement('div');
+      orbGlass.className = 'rf-season-orb-glass';
+      var orbLiquid = document.createElement('div');
+      orbLiquid.className = 'rf-season-orb-liquid';
+      orbGlass.appendChild(orbLiquid);
+      orb.appendChild(orbGlass);
+      var orbCaption = document.createElement('span');
+      orbCaption.className = 'rf-season-orb-caption';
+      orbCaption.textContent = 'ПРОГРЕСС';
+      orb.appendChild(orbCaption);
+      heading.parentNode.insertBefore(headingRow, heading);
+      headingRow.appendChild(heading);
+      headingRow.appendChild(orb);
+
+      function updateSeasonOrb() {
+        var foundTotal = 0;
+        var availableTotal = 0;
+        TASKS.forEach(function(task) {
+          var p = progressFor(findRow(task, container));
+          foundTotal += p.found || 0;
+          availableTotal += p.total || 0;
+        });
+        if (availableTotal <= 0) {
+          orb.title = 'Общий прогресс сезона пока недоступен';
+          return;
+        }
+        var percent = Math.max(0, Math.min(100, foundTotal / availableTotal * 100));
+        orb.style.setProperty('--rf-orb-level', percent + '%');
+        orb.title = 'Найдено ' + foundTotal + ' из ' + availableTotal + ' кодов · ' + Math.round(percent) + '%';
+        orb.setAttribute('aria-label', 'Общий прогресс сезона: найдено ' + foundTotal + ' из ' + availableTotal + ' кодов, ' + Math.round(percent) + ' процентов');
+      }
+      updateSeasonOrb();
+      window.setInterval(updateSeasonOrb, 2500);
+      heading.parentNode.insertBefore(map, headingRow.nextSibling);
       if (!map.parentNode) throw new Error('Map insertion failed');
 
       TASKS.forEach(function(task) {
