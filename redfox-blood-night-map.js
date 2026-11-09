@@ -556,7 +556,7 @@
       var totalPanel = document.createElement('section');
       totalPanel.id = 'rf-season-total-progress';
       totalPanel.setAttribute('aria-label','Общий прогресс нахождения кодов');
-      totalPanel.innerHTML = '<div class="rf-total-head"><span>Общий прогресс сезона</span><span class="rf-total-count">0 из 0 кодов</span></div><div class="rf-total-tube"><div class="rf-total-fill"></div><span class="rf-total-glass-shine"></span></div><div class="rf-total-foot"><span>НАЙДЕНО КОДОВ</span><span class="rf-total-percent">0%</span></div>';
+      totalPanel.innerHTML = '<div class="rf-total-head"><span>Общий прогресс</span><span class="rf-total-count">0 из 0 кодов</span></div><div class="rf-total-tube"><div class="rf-total-fill"></div><span class="rf-total-glass-shine"></span></div><div class="rf-total-foot"><span>НАЙДЕНО КОДОВ</span><span class="rf-total-percent">0%</span></div>';
       var totalFill = totalPanel.querySelector('.rf-total-fill');
       var totalCount = totalPanel.querySelector('.rf-total-count');
       var totalPercent = totalPanel.querySelector('.rf-total-percent');
