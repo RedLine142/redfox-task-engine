@@ -1,4 +1,4 @@
-/* RED FOX — BLOOD NIGHT + HORROR MAP v1.5.0
+/* RED FOX — BLOOD NIGHT + HORROR MAP v1.6.0
    Single-file build: original Blood Night theme followed by the interactive season map.
    Both modules are restricted to /play/safari and leave admin pages untouched.
 */
@@ -137,15 +137,41 @@
         background:linear-gradient(90deg,#780b22,#e21d3d 75%,#ff5364) !important;
         box-shadow:0 0 12px rgba(240,43,67,.5);
       }
+      body.rf-blood-night { padding-bottom:112px !important; }
       body.rf-blood-night .time {
-        box-sizing:border-box; width:min(1120px,calc(100% - 28px)); margin:20px auto !important;
-        padding:17px 22px !important; border:1px solid rgba(214,34,59,.42); border-radius:4px;
-        background:linear-gradient(100deg,rgba(73,8,24,.92),rgba(17,10,14,.96));
-        box-shadow:0 0 28px rgba(134,7,31,.15);
+        box-sizing:border-box; position:fixed !important; z-index:50 !important;
+        left:0; right:0; bottom:0; width:100% !important; margin:0 !important;
+        padding:12px max(14px,calc((100vw - 1120px)/2)) 14px !important;
+        border:0; border-top:1px solid rgba(240,43,67,.58); border-radius:0;
+        background:linear-gradient(100deg,rgba(48,7,17,.97),rgba(12,8,11,.98) 55%,rgba(42,6,15,.97));
+        box-shadow:0 -10px 35px rgba(0,0,0,.55),0 -2px 18px rgba(181,18,43,.18);
+        -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
       }
       body.rf-blood-night .time .wrapper {
-        display:flex; align-items:center; justify-content:space-between; gap:15px;
-        width:100%; margin:0;
+        display:flex; align-items:center; justify-content:space-between; gap:18px;
+        width:100%; max-width:1120px; margin:0 auto;
+      }
+      body.rf-blood-night .rf-blood-time-progress {
+        width:100%; max-width:1120px; height:5px; margin:10px auto 0;
+        overflow:hidden; border:1px solid rgba(255,255,255,.08); border-radius:20px;
+        background:rgba(0,0,0,.62); box-shadow:inset 0 1px 3px rgba(0,0,0,.8);
+      }
+      body.rf-blood-night .rf-blood-time-progress span {
+        display:block; width:0; height:100%; border-radius:inherit;
+        background:linear-gradient(90deg,#790b22 0%,#d51a38 68%,#ff5268 100%);
+        box-shadow:0 0 12px rgba(240,43,67,.65);
+        transition:width .45s ease,background .3s ease;
+      }
+      body.rf-blood-night .time.rf-time-warning .rf-blood-time-progress span {
+        background:linear-gradient(90deg,#a40b27,#ff2949);
+        box-shadow:0 0 15px rgba(255,35,65,.8);
+      }
+      body.rf-blood-night .time.rf-time-critical #time_left {
+        color:#ff263f !important; animation:rf-blood-timer-pulse 1s ease-in-out infinite alternate;
+      }
+      @keyframes rf-blood-timer-pulse {
+        from { text-shadow:0 0 5px rgba(240,43,67,.35); }
+        to { text-shadow:0 0 18px rgba(255,35,65,.95); }
       }
       body.rf-blood-night .level_time {
         color:#d7b9bf !important; font-size:12px; font-weight:800;
@@ -190,8 +216,12 @@
           gap:10px; min-height:76px; padding:9px 10px 9px 13px !important;
         }
         body.rf-blood-night .item a > div:not(.progress) { font-size:14px; }
-        body.rf-blood-night .time { width:calc(100% - 18px); padding:13px 12px !important; }
-        body.rf-blood-night .time .wrapper { align-items:flex-start; flex-direction:column; gap:8px; }
+        body.rf-blood-night { padding-bottom:126px !important; }
+        body.rf-blood-night .time { width:100% !important; padding:10px 12px 12px !important; }
+        body.rf-blood-night .time .wrapper { align-items:center; flex-direction:row; gap:10px; }
+        body.rf-blood-night .level_time { font-size:10px; letter-spacing:.1em; }
+        body.rf-blood-night #time_left { font-size:16px; }
+        body.rf-blood-night .timer { font-size:12px; }
         body.rf-blood-night .locations { width:calc(100% - 18px); }
       }
       @media (prefers-reduced-motion:reduce) {
@@ -226,6 +256,48 @@
     document.body.appendChild(layer);
   }
 
+  function setupBottomTimer() {
+    var timeBox = document.querySelector('.time');
+    if (!timeBox) return;
+
+    var wrapper = timeBox.querySelector('.wrapper');
+    if (!wrapper) return;
+
+    var progress = timeBox.querySelector('.rf-blood-time-progress');
+    if (!progress) {
+      progress = document.createElement('div');
+      progress.className = 'rf-blood-time-progress';
+      progress.setAttribute('role', 'progressbar');
+      progress.setAttribute('aria-label', 'Время игры');
+      progress.setAttribute('aria-valuemin', '0');
+      progress.setAttribute('aria-valuemax', '100');
+      var fill = document.createElement('span');
+      progress.appendChild(fill);
+      timeBox.appendChild(progress);
+    }
+
+    if (timeBox._rfBloodTimerInterval) return;
+
+    function updateProgress() {
+      var spent = Number(window.time_spent);
+      var left = Number(window.time_left);
+      if (!isFinite(spent) || !isFinite(left) || spent < 0 || left < 0 || spent + left <= 0) return;
+
+      var total = spent + left;
+      var completed = Math.max(0, Math.min(100, spent / total * 100));
+      var remaining = 100 - completed;
+      var fill = progress.firstElementChild;
+      if (fill) fill.style.width = completed + '%';
+
+      progress.setAttribute('aria-valuenow', String(Math.round(completed)));
+      timeBox.classList.toggle('rf-time-warning', remaining <= 25 && remaining > 10);
+      timeBox.classList.toggle('rf-time-critical', remaining <= 10);
+    }
+
+    updateProgress();
+    timeBox._rfBloodTimerInterval = window.setInterval(updateProgress, 500);
+  }
+
   function isGameCabinetPage() {
     // Strict URL gate: only player Safari pages. Admin pages are always excluded.
     var path = window.location && window.location.pathname
@@ -255,6 +327,7 @@
     document.documentElement.classList.add(ROOT_CLASS);
     document.body.classList.add(ROOT_CLASS);
     addParticles();
+    setupBottomTimer();
     var title = document.querySelector('.container h1');
     if (title) title.setAttribute('data-rf-theme', 'blood-night');
     if (window.console && console.info) console.info('[RED FOX] Blood Night page theme ready');
@@ -269,7 +342,7 @@
 
 /* ===== HORROR SEASON MAP MODULE ===== */
 
-/* RED FOX — HORROR SEASON MAP v1.5.0
+/* RED FOX — HORROR SEASON MAP v1.6.0
    Fail-safe visual replacement. The original task list is hidden only after
    the map image has loaded and the map has been inserted successfully.
 */
