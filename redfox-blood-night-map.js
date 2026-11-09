@@ -157,26 +157,27 @@
         box-shadow:inset 0 2px 4px rgba(0,0,0,.9),inset 0 0 5px rgba(255,90,112,.12),
           0 0 0 1px rgba(0,0,0,.55),0 2px 7px rgba(0,0,0,.5);
       }
-      body.rf-blood-night .rf-blood-time-progress::before {
-        content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-        background-image:
-          radial-gradient(circle,rgba(255,112,135,.9) 0 1px,transparent 1.7px),
-          radial-gradient(circle,rgba(213,26,56,.85) 0 1.3px,transparent 2px),
-          radial-gradient(circle,rgba(255,190,199,.7) 0 .8px,transparent 1.5px);
-        background-size:29px 15px,43px 18px,61px 13px;
-        background-position:5px 2px,18px 8px,31px 1px;
-        opacity:.82; animation:rf-blood-bubbles 3.8s linear infinite;
-      }
       body.rf-blood-night .rf-blood-time-progress::after {
         content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
         border-radius:inherit;
         background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.035) 38%,transparent 62%);
       }
       body.rf-blood-night .rf-blood-time-progress span {
-        position:relative; z-index:2; display:block; width:0; height:100%; border-radius:inherit;
+        position:relative; z-index:2; display:block; width:0; height:100%;
+        overflow:hidden; border-radius:inherit;
         background:linear-gradient(180deg,#ff5268 0%,#d51a38 42%,#790b22 100%);
         box-shadow:0 0 12px rgba(240,43,67,.65),inset 0 1px 2px rgba(255,190,199,.35);
         transition:width .45s ease,background .3s ease;
+      }
+      body.rf-blood-night .rf-blood-time-progress span::before {
+        content:""; position:absolute; inset:0; pointer-events:none;
+        background-image:
+          radial-gradient(circle,rgba(255,190,199,.95) 0 1px,transparent 1.8px),
+          radial-gradient(circle,rgba(255,112,135,.9) 0 1.2px,transparent 2px),
+          radial-gradient(circle,rgba(121,11,34,.9) 0 1px,transparent 1.8px);
+        background-size:29px 15px,43px 18px,61px 13px;
+        background-position:5px 2px,18px 8px,31px 1px;
+        opacity:.82; animation:rf-blood-bubbles 3.8s linear infinite;
       }
       @keyframes rf-blood-bubbles {
         from { background-position:5px 2px,18px 8px,31px 1px; }
