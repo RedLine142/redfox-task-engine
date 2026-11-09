@@ -1,4 +1,4 @@
-/* RED FOX — BLOOD NIGHT + HORROR MAP v1.6.0
+/* RED FOX — BLOOD NIGHT + HORROR MAP v1.7.0
    Single-file build: original Blood Night theme followed by the interactive season map.
    Both modules are restricted to /play/safari and leave admin pages untouched.
 */
@@ -390,7 +390,7 @@
 
 /* ===== HORROR SEASON MAP MODULE ===== */
 
-/* RED FOX — HORROR SEASON MAP v1.6.0
+/* RED FOX — HORROR SEASON MAP v1.7.0
    Fail-safe visual replacement. The original task list is hidden only after
    the map image has loaded and the map has been inserted successfully.
 */
